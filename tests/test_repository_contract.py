@@ -7,13 +7,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readmes_embed_only_repository_mp4s() -> None:
+def test_readmes_link_mp4s_with_repository_previews() -> None:
     for readme_name in ("README.md", "README_zh-CN.md"):
         readme = (ROOT / readme_name).read_text(encoding="utf-8")
-        sources = re.findall(r'<video src="([^\"]+\.mp4)" controls>', readme)
-        assert len(sources) == 10
-        assert ".gif" not in readme
-        assert all((ROOT / source).is_file() for source in sources)
+        media = re.findall(
+            r'<a href="([^\"]+\.mp4)\?raw=1"><img src="([^\"]+\.gif)"',
+            readme,
+        )
+        assert len(media) == 10
+        assert "<video" not in readme
+        assert len({mp4 for mp4, _ in media}) == 10
+        assert len({preview for _, preview in media}) == 10
+        assert all((ROOT / mp4).is_file() for mp4, _ in media)
+        assert all((ROOT / preview).is_file() for _, preview in media)
 
 
 def test_readme_performance_matches_canonical_results() -> None:

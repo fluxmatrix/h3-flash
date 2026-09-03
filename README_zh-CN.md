@@ -36,14 +36,16 @@ H3-Flash 将多 GPU 序列并行、融合算子、
 
 ## 样例
 
+点击任意预览即可播放带声音的 MP4。
+
 <table>
   <tr>
-    <td width="50%"><video src="assets/samples/flash/cinematic_glacier_escape.mp4" controls></video><br><b>冰川逃生</b><br>自然的大画幅动作场面、可信的冰体运动与同步撞击声</td>
-    <td width="50%"><video src="assets/samples/flash/neon_metro_runner.mp4" controls></video><br><b>霓虹地铁跑酷</b><br>次世代 3D 游戏美术、干净几何结构、视差与同步动作</td>
+    <td width="50%"><a href="assets/samples/flash/cinematic_glacier_escape.mp4?raw=1"><img src="assets/previews/samples/cinematic_glacier_escape.gif" alt="冰川逃生" width="100%"></a><br><b>冰川逃生</b><br>自然的大画幅动作场面、可信的冰体运动与同步撞击声</td>
+    <td width="50%"><a href="assets/samples/flash/neon_metro_runner.mp4?raw=1"><img src="assets/previews/samples/neon_metro_runner.gif" alt="霓虹地铁跑酷" width="100%"></a><br><b>霓虹地铁跑酷</b><br>次世代 3D 游戏美术、干净几何结构、视差与同步动作</td>
   </tr>
   <tr>
-    <td width="50%"><video src="assets/samples/flash/capybara_giant_dumpling.mp4" controls></video><br><b>巨型饺子</b><br>现代角色动画、稳定形体、鲜明反应与拟音</td>
-    <td width="50%"><video src="assets/samples/flash/studio_dance.mp4" controls></video><br><b>单人舞蹈</b><br>中国单人舞者、干净商业人像、富有表现力的编舞与节奏音频</td>
+    <td width="50%"><a href="assets/samples/flash/capybara_giant_dumpling.mp4?raw=1"><img src="assets/previews/samples/capybara_giant_dumpling.gif" alt="巨型饺子" width="100%"></a><br><b>巨型饺子</b><br>现代角色动画、稳定形体、鲜明反应与拟音</td>
+    <td width="50%"><a href="assets/samples/flash/studio_dance.mp4?raw=1"><img src="assets/previews/samples/studio_dance.gif" alt="单人舞蹈" width="100%"></a><br><b>单人舞蹈</b><br>中国单人舞者、干净商业人像、富有表现力的编舞与节奏音频</td>
   </tr>
 </table>
 
@@ -84,6 +86,7 @@ FFmpeg 写出。标称 5 秒、10 秒和 15 秒的测试分别使用 124、243 �
 
 每一行均使用相同的 Prompt、随机种子、分辨率和视频时长。标注的耗时与上表采用
 相同口径，均为预热后常驻 Worker 的端到端耗时。
+点击任意预览即可播放带声音的 MP4。
 
 <table>
   <tr>
@@ -92,14 +95,14 @@ FFmpeg 写出。标称 5 秒、10 秒和 15 秒的测试分别使用 124、243 �
     <th>FLASH · 8×B200</th>
   </tr>
   <tr>
-    <td><video src="assets/comparisons/modes/people_mandarin_interview_official.mp4" controls></video><br><b>普通话采访 · 端到端 178.512s</b></td>
-    <td><video src="assets/comparisons/modes/people_mandarin_interview_lossless.mp4" controls></video><br><b>普通话采访 · 端到端 20.840s</b></td>
-    <td><video src="assets/comparisons/modes/people_mandarin_interview_flash.mp4" controls></video><br><b>普通话采访 · 端到端 2.690s</b></td>
+    <td><a href="assets/comparisons/modes/people_mandarin_interview_official.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_official.gif" alt="OFFICIAL 模式普通话采访" width="100%"></a><br><b>普通话采访 · 端到端 178.512s</b></td>
+    <td><a href="assets/comparisons/modes/people_mandarin_interview_lossless.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_lossless.gif" alt="LOSSLESS 模式普通话采访" width="100%"></a><br><b>普通话采访 · 端到端 20.840s</b></td>
+    <td><a href="assets/comparisons/modes/people_mandarin_interview_flash.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_flash.gif" alt="FLASH 模式普通话采访" width="100%"></a><br><b>普通话采访 · 端到端 2.690s</b></td>
   </tr>
   <tr>
-    <td><video src="assets/comparisons/modes/action_rooftop_parkour_official.mp4" controls></video><br><b>屋顶跑酷 · 端到端 176.437s</b></td>
-    <td><video src="assets/comparisons/modes/action_rooftop_parkour_lossless.mp4" controls></video><br><b>屋顶跑酷 · 端到端 20.915s</b></td>
-    <td><video src="assets/comparisons/modes/action_rooftop_parkour_flash.mp4" controls></video><br><b>屋顶跑酷 · 端到端 2.593s</b></td>
+    <td><a href="assets/comparisons/modes/action_rooftop_parkour_official.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_official.gif" alt="OFFICIAL 模式屋顶跑酷" width="100%"></a><br><b>屋顶跑酷 · 端到端 176.437s</b></td>
+    <td><a href="assets/comparisons/modes/action_rooftop_parkour_lossless.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_lossless.gif" alt="LOSSLESS 模式屋顶跑酷" width="100%"></a><br><b>屋顶跑酷 · 端到端 20.915s</b></td>
+    <td><a href="assets/comparisons/modes/action_rooftop_parkour_flash.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_flash.gif" alt="FLASH 模式屋顶跑酷" width="100%"></a><br><b>屋顶跑酷 · 端到端 2.593s</b></td>
   </tr>
 </table>
 
