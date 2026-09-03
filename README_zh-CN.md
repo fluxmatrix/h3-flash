@@ -158,6 +158,10 @@ scripts/generate.sh \
 
 ### 网页演示
 
+<video src="https://github.com/user-attachments/assets/7b7c546b-f6ec-49eb-8aa9-c31f834cf959" controls></video>
+
+在同一页面中输入 Prompt、按需自动增强，并生成、播放最终视频。
+
 ```bash
 scripts/serve.sh
 ```

@@ -164,6 +164,10 @@ Runtime files default to a sibling `.h3-flash-runtime` directory.
 
 ### Web demo
 
+<video src="https://github.com/user-attachments/assets/7b7c546b-f6ec-49eb-8aa9-c31f834cf959" controls></video>
+
+Enter a prompt, optionally enhance it, and generate and play the result in one page.
+
 ```bash
 scripts/serve.sh
 ```

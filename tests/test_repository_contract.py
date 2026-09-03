@@ -15,8 +15,8 @@ def test_readmes_embed_github_video_attachments() -> None:
             r'[a-f0-9-]+)" controls></video>',
             readme,
         )
-        assert len(sources) == 10
-        assert len(set(sources)) == 10
+        assert len(sources) == 11
+        assert len(set(sources)) == 11
         assert "assets/previews" not in readme
 
     repository_mp4s = list((ROOT / "assets" / "samples" / "flash").glob("*.mp4"))
