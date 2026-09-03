@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+source "$script_dir/lib/runtime.sh"
+project_root=$h3_flash_project_root
+python_bin="$h3_flash_venv_root/bin/python"
+diffusers_checkout=$h3_flash_diffusers_root
+ffmpeg_bin="$h3_flash_ffmpeg_root/bin/ffmpeg"
+
+if [[ ! -x "$python_bin" ]]; then
+  echo "H3-Flash environment is missing; run scripts/bootstrap_b200.sh first" >&2
+  exit 2
+fi
+if [[ ! -f "$diffusers_checkout/src/diffusers/__init__.py" ]]; then
+  echo "Pinned Diffusers checkout is missing; run scripts/bootstrap_b200.sh first" >&2
+  exit 2
+fi
+
+export H3_FLASH_ROOT="$project_root"
+export H3_FLASH_FFMPEG_BIN="$ffmpeg_bin"
+export PATH="$h3_flash_venv_root/bin:$h3_flash_ffmpeg_root/bin:$PATH"
+export LD_LIBRARY_PATH="$h3_flash_ffmpeg_root/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export PYTHONPATH="$project_root/src:$diffusers_checkout/src${PYTHONPATH:+:$PYTHONPATH}"
+
+exec "$python_bin" -m h3_flash.cli "$@"

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "name": "H3-Flash B200 resident-worker latency",
+  "hardware": "NVIDIA B200",
+  "metric": {
+    "name": "resident_worker_e2e_seconds",
+    "statistic": "median",
+    "cases_per_cell": 4,
+    "starts": "before text encoding",
+    "ends": "after MP4 video and complete audio are written",
+    "includes": [
+      "text encoding",
+      "joint audio-video diffusion",
+      "video VAE decode",
+      "audio VAE decode",
+      "device-to-host transfer",
+      "MP4 encoding"
+    ],
+    "excludes": [
+      "model loading",
+      "first-use compilation and warm-up",
+      "prompt enhancement",
+      "queueing",
+      "network delivery"
+    ]
+  },
+  "modes": {
+    "OFFICIAL": {
+      "gpus_per_request": 1,
+      "artifact_writer": "Diffusers/PyAV"
+    },
+    "LOSSLESS": {
+      "gpus_per_request": 8,
+      "artifact_writer": "FFmpeg raw pipe"
+    },
+    "FLASH": {
+      "gpus_per_request": 8,
+      "artifact_writer": "FFmpeg raw pipe"
+    }
+  },
+  "results": [
+    {
+      "resolution": [832, 480],
+      "nominal_duration_seconds": 5,
+      "frames": 124,
+      "fps": 24,
+      "encoded_duration_seconds": 5.167,
+      "OFFICIAL": 52.917,
+      "LOSSLESS": 6.563,
+      "FLASH": 1.097
+    },
+    {
+      "resolution": [832, 480],
+      "nominal_duration_seconds": 10,
+      "frames": 243,
+      "fps": 24,
+      "encoded_duration_seconds": 10.125,
+      "OFFICIAL": 123.084,
+      "LOSSLESS": 14.995,
+      "FLASH": 2.172
+    },
+    {
+      "resolution": [832, 480],
+      "nominal_duration_seconds": 15,
+      "frames": 345,
+      "fps": 24,
+      "encoded_duration_seconds": 14.375,
+      "OFFICIAL": 206.002,
+      "LOSSLESS": 23.916,
+      "FLASH": 3.086
+    },
+    {
+      "resolution": [1344, 768],
+      "nominal_duration_seconds": 5,
+      "frames": 124,
+      "fps": 24,
+      "encoded_duration_seconds": 5.167,
+      "OFFICIAL": 176.452,
+      "LOSSLESS": 20.807,
+      "FLASH": 2.546
+    },
+    {
+      "resolution": [1344, 768],
+      "nominal_duration_seconds": 10,
+      "frames": 243,
+      "fps": 24,
+      "encoded_duration_seconds": 10.125,
+      "OFFICIAL": 486.991,
+      "LOSSLESS": 57.301,
+      "FLASH": 6.060
+    },
+    {
+      "resolution": [1344, 768],
+      "nominal_duration_seconds": 15,
+      "frames": 345,
+      "fps": 24,
+      "encoded_duration_seconds": 14.375,
+      "OFFICIAL": 852.360,
+      "LOSSLESS": 103.299,
+      "FLASH": 10.323
+    }
+  ]
+}

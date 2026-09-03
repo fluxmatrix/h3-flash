@@ -1,0 +1,29 @@
+schema_version = 1
+id = "lossless-8xb200"
+status = "experimental"
+parent = "lossless-1xb200"
+quality_class = "numerically_equivalent"
+description = "Cumulative eight-B200 lossless candidate with Ulysses dense context parallelism."
+
+[execution]
+accelerator_count = 8
+topology = "tp1_ulysses_sp8"
+
+[parallel]
+sequence_parallel = "ulysses_anything"
+world_size = 8
+
+[optimizations]
+packed_ulysses = true
+rank_local_inputs = true
+compact_output_gather = true
+
+[vae]
+video_decoder = "official_clip_parallel"
+compile_mode = "default"
+
+[correctness]
+_replace = true
+contract = "numerically_equivalent"
+tensor_gate = "bounded_numeric_error"
+quality_gate = "broad40_blind_review"

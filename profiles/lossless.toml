@@ -1,0 +1,6 @@
+schema_version = 1
+id = "lossless"
+status = "measured_local"
+parent = "lossless-8xb200-ffmpeg"
+quality_class = "numerically_equivalent"
+description = "Public LOSSLESS lane: official BF16/49-evaluation dense H3 plus the cumulative eight-B200 lossless runtime and full-audio FFmpeg output."

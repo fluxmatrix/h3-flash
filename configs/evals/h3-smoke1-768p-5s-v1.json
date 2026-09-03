@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-smoke1-768p-5s-v1",
+  "base_suite": "h3-broad40-v1.1.json",
+  "resolution": [1344, 768],
+  "num_frames": 124,
+  "fps": 24,
+  "case_ids": ["people_mandarin_interview"]
+}

@@ -1,0 +1,23 @@
+schema_version = 1
+id = "lossless-8xb200-native-ulysses-only"
+status = "internal_ablation"
+parent = "official"
+quality_class = "numerically_equivalent"
+description = "Internal Gate4 ablation of native dense Ulysses SP8 with replicated official Video VAE and no H3-Flash kernel/cache optimizations."
+
+[execution]
+accelerator_count = 8
+topology = "tp1_ulysses_sp8"
+
+[parallel]
+sequence_parallel = "ulysses_anything"
+world_size = 8
+
+[vae]
+video_decoder = "official_replicated"
+
+[correctness]
+_replace = true
+contract = "numerically_equivalent"
+tensor_gate = "bounded_numeric_error"
+quality_gate = "gate4_only"

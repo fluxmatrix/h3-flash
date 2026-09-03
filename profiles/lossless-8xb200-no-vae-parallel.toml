@@ -1,0 +1,16 @@
+schema_version = 1
+id = "lossless-8xb200-no-vae-parallel"
+status = "internal_ablation"
+parent = "lossless-8xb200"
+quality_class = "numerically_equivalent"
+description = "Internal Gate4 ablation with the official Video VAE replicated on every rank."
+
+[vae]
+_replace = true
+video_decoder = "official_replicated"
+
+[correctness]
+_replace = true
+contract = "numerically_equivalent"
+tensor_gate = "bounded_numeric_error"
+quality_gate = "gate4_only"

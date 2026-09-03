@@ -1,0 +1,26 @@
+schema_version = 1
+id = "fast-turbo4-bf16-dense-8xb200"
+status = "experimental"
+parent = "lossless-8xb200"
+quality_class = "approximate"
+description = "Single-factor fast candidate: LightX2V Turbo4 weights and four transformer evaluations on the otherwise cumulative BF16 dense SP8 runtime."
+
+[model]
+transformer = "official_bf16_plus_lightx2v_turbo4"
+text_encoder = "official_bf16"
+turbo_lora = "lightx2v_fl2v_4step_v1"
+
+[sampling]
+api_num_inference_steps = 5
+model_evaluations = 4
+count_semantics = "sigma_grid_points_including_terminal_zero"
+schedule = "lightx2v_turbo4"
+
+[correctness]
+_replace = true
+contract = "approximate"
+quality_gate = "gate4_then_broad40_review"
+requires_single_factor_ablations = true
+
+[provenance]
+model_lock = "models.fast-turbo4-bf16-inputs"

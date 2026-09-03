@@ -1,0 +1,16 @@
+schema_version = 1
+id = "lossless-dense-fa4"
+status = "experimental"
+parent = "official"
+quality_class = "numerically_equivalent"
+description = "Single-factor lossless ablation: dense Blackwell FlashAttention 4."
+
+[attention]
+semantics = "dense"
+backend = "flash_attention_4"
+
+[correctness]
+_replace = true
+contract = "numerically_equivalent"
+tensor_gate = "bounded_numeric_error"
+quality_gate = "broad40_blind_review"

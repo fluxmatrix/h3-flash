@@ -1,0 +1,15 @@
+schema_version = 1
+id = "fast-turbo4-bf16-dense-8xb200-ffmpeg"
+status = "experimental"
+parent = "fast-turbo4-bf16-dense-8xb200"
+quality_class = "approximate"
+description = "Turbo4-only fast candidate with the FFmpeg raw-video output path used by the legacy latency endpoint."
+
+[output]
+encoder = "ffmpeg_raw_pipe"
+video_codec = "libx264"
+preset = "veryfast"
+crf = 20
+pixel_format = "yuv420p"
+audio_codec = "aac"
+contract = "generated_tensors_exact_encoded_artifact_not_bit_exact"

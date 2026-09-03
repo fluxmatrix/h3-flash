@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-broad40-v1.1",
+  "purpose": "A text-only audiovisual evaluation suite spanning people, motion, physics, animals, worlds, styles, commercial work and diagnostic consistency. All prompts follow MiniMax H3's official three-field base format.",
+  "resolution": [1344, 768],
+  "num_frames": 124,
+  "fps": 24,
+  "design_notes": [
+    "All 40 cases are T2VA so the same prompt and seed can be submitted to the local accelerated route, the released base sampler, FastH3 and fal H3 Max.",
+    "Each case has a primary category and explicit stress axes; quality review should score prompt adherence, motion, temporal consistency, visual quality, audio quality and audio-video synchronization separately.",
+    "Community-inspired cases are newly written prompts, not transcriptions, unless the provenance note explicitly says otherwise.",
+    "The suite includes both spectacular motion and low-motion controls so a method is not rewarded merely for suppressing motion.",
+    "Dialogue remains in its original language inside H3 dialogue tags; all directing text is English, following the official prompt guide."
+  ],
+  "five_second_review": {
+    "reviewed_at": "2026-09-02",
+    "target_duration_seconds": 5.167,
+    "result": "40/40 cases fit the target duration after eight prompts were simplified without removing their primary stress axes.",
+    "criteria": [
+      "One continuous shot and one primary action beat, with at most one short causal follow-up.",
+      "Spoken or sung content must fit naturally in roughly four seconds, leaving time for visible action and ambience.",
+      "Camera motion supports the subject action rather than introducing an additional narrative stage.",
+      "Exact-count, identity and geometry constraints are retained only when they are the intended diagnostic target."
+    ],
+    "revised_cases": [
+      "people_mandarin_interview",
+      "people_persian_bazaar_greeting",
+      "people_mandarin_singer",
+      "people_bilingual_cafe_exchange",
+      "animal_horses_shallow_water",
+      "world_speeder_cliff_chase",
+      "world_rover_rock_crossing",
+      "commercial_ramen_one_take"
+    ]
+  },
+  "sources": [
+    {
+      "kind": "official_prompt_guide",
+      "url": "https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/h3-prompt-writing",
+      "note": "Structure, shot, camera, dialogue and sound-field rules."
+    },
+    {
+      "kind": "official_model_examples",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "note": "Official H3 capabilities and audiovisual example structure."
+    },
+    {
+      "kind": "community_index",
+      "url": "https://github.com/opensource-works/awesome-minimax-h3-prompts",
+      "note": "Public X showcase index used only to identify underrepresented creative themes."
+    },
+    {
+      "kind": "community_prompt",
+      "url": "https://x.com/umesh_ai/status/2082499539735588916",
+      "note": "Public cliff-city speeder example; case world_speeder_cliff_chase is a shorter, newly structured diagnostic adaptation."
+    },
+    {
+      "kind": "community_showcase",
+      "url": "https://x.com/CallMeDiegoJr/status/2082554826349535341",
+      "note": "Persian voice showcase inspired multilingual speech coverage; no prompt was published in the indexed post."
+    },
+    {
+      "kind": "community_showcase",
+      "url": "https://x.com/FutureVibesAi/status/2082529869297246414",
+      "note": "Dance showcase inspired choreography coverage; no prompt was published in the indexed post."
+    },
+    {
+      "kind": "community_showcase",
+      "url": "https://x.com/riyazmd774/status/2082519642145485080",
+      "note": "Burger-versus-cola showcase inspired a product-character interaction case; no prompt was published in the indexed post."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "people_mandarin_interview",
+      "mode": "t2va",
+      "seed": 2026090201,
+      "category": "people_and_voice",
+      "stress_axes": ["face_identity", "mandarin_lip_sync", "hands", "shallow_depth_of_field"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live-action, photorealistic medium close-up of a Chinese robotics engineer in her early thirties seated in a quiet workshop at sunrise. Soft window light reveals natural skin texture, loose dark hair and a small silver wrench on the table. The camera pushes in with small amplitude at slow speed as the calm woman (S1) looks into the lens, makes one precise open-hand gesture and says: <d>[Mandarin] 机器不只要快，也要值得信任。</d> Her hand settles beside the wrench while her face and eyeline remain stable.\n\noverall_soundscape: Clean synchronized speech, subtle breathing, a low ventilation hum and one distant metallic click.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "people_english_whisper_secret",
+      "mode": "t2va",
+      "seed": 2026090202,
+      "category": "people_and_voice",
+      "stress_axes": ["extreme_closeup", "english_lip_sync", "whisper", "low_light"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live-action extreme close-up of a freckled woman with short auburn hair standing inside a dim archive room. A narrow flashlight beam moves across shelves behind her while her face stays sharply focused. The camera holds nearly static as the breathy woman (S1) glances toward a closed door and whispers: <d>[English] The map was hidden inside the clock.</d> She presses one finger to her lips, then listens without changing identity or position.\n\noverall_soundscape: Intimate synchronized whispering, quiet breathing, faint paper movement and a distant wooden floor creak.\n\nnon_diegetic_music: One sustained low cello note that fades to silence."
+    },
+    {
+      "case_id": "people_persian_bazaar_greeting",
+      "mode": "t2va",
+      "seed": 2026090203,
+      "category": "people_and_voice",
+      "stress_axes": ["persian_lip_sync", "elderly_face", "busy_background", "object_handoff"],
+      "provenance": "community-theme-inspired: https://x.com/CallMeDiegoJr/status/2082554826349535341",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live-action medium shot in a sunlit Tehran spice bazaar. An elderly male saffron seller with a white moustache and warm gravelly voice (S1) stands behind neat copper bowls while shoppers pass softly out of focus. The camera trucks right with small amplitude as he offers a tiny paper packet toward the viewer and says: <d>[Persian] خوش آمدید، این زعفران عطر خانه را زنده می‌کند.</d> He holds the packet steady and smiles.\n\noverall_soundscape: Synchronized Persian speech, soft market conversation, footsteps and the light clink of copper bowls.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "people_mandarin_singer",
+      "mode": "t2va",
+      "seed": 2026090204,
+      "category": "people_and_voice",
+      "stress_axes": ["singing_lip_sync", "voice_stability", "microphone_geometry", "performance"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Cinematic live-action medium shot of a young female singer in a dark red jacket performing into a vintage ribbon microphone in a warm brick studio. Her recognizable face, hands, microphone and camera distance remain stable. The camera arcs gently left as the clear alto singer (S1) sings: <d>[Mandarin, singing] 星光落窗边，明天唱给你听。</d> She sustains the final vowel and lowers her free hand.\n\noverall_soundscape: Clear synchronized lead vocal, restrained room ambience and a faint headphone cable movement.\n\nnon_diegetic_music: Soft piano chords and brushed drums at a slow tempo beneath the vocal."
+    },
+    {
+      "case_id": "people_bilingual_cafe_exchange",
+      "mode": "t2va",
+      "seed": 2026090205,
+      "category": "people_and_voice",
+      "stress_axes": ["two_speakers", "identity_separation", "multilingual_lip_sync", "turn_taking"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live-action two-shot in a small railway cafe during rain. A young Black woman in a green coat (S1) slides a postcard across the table and asks: <d>[English] You took this in Valparaíso?</d> The older Latino man opposite her in a tan jacket (S2) catches it and replies with a gentle Chilean accent: <d>[Spanish] Sí, antes de la tormenta.</d> The camera slowly pushes in while both faces, hands, cups and seating positions remain distinct.\n\noverall_soundscape: Two clean synchronized voices, rain on glass, a postcard sliding on wood and low cafe room tone.\n\nnon_diegetic_music: Sparse nylon-string guitar notes at a slow tempo."
+    },
+    {
+      "case_id": "action_rooftop_parkour",
+      "mode": "t2va",
+      "seed": 2026090206,
+      "category": "action_and_interaction",
+      "stress_axes": ["fast_full_body_motion", "articulation", "tracking_camera", "landing_physics"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Photorealistic golden-hour tracking shot follows a traceur in a gray hoodie sprinting across a rooftop. He plants both hands on a concrete ledge, vaults cleanly, tucks into one forward roll on the next roof and rises back into a run without a cut. The camera trucks alongside at fast speed, keeping his anatomy, clothing, direction and city skyline coherent as dust kicks up on landing.\n\noverall_soundscape: Rapid footfalls, fabric movement, one palm impact, a heavy landing and distant city wind synchronized to the action.\n\nnon_diegetic_music: Fast muted percussion that stops on the final footfall."
+    },
+    {
+      "case_id": "action_street_dance_circle",
+      "mode": "t2va",
+      "seed": 2026090207,
+      "category": "action_and_interaction",
+      "stress_axes": ["choreography", "limb_consistency", "rhythm_sync", "dynamic_camera"],
+      "provenance": "community-theme-inspired: https://x.com/FutureVibesAi/status/2082529869297246414",
+      "prompt": "integrated_multimodal_description: [Shot 1] Energetic live-action night scene in a wet city plaza. A female street dancer in a yellow bomber jacket performs one continuous eight-count: heel slide, sharp shoulder hit, full clockwise turn and controlled knee drop, while four friends form a stable circle behind her. A handheld camera orbits a quarter turn and settles low at the end; her face, outfit, limbs and the surrounding dancers remain coherent.\n\noverall_soundscape: Shoe squeaks, jacket movement, friends cheering once and rainwater splashing under the synchronized steps.\n\nnon_diegetic_music: Crisp breakbeat with a strong downbeat aligned to the knee drop."
+    },
+    {
+      "case_id": "action_chefs_plate_handoff",
+      "mode": "t2va",
+      "seed": 2026090208,
+      "category": "action_and_interaction",
+      "stress_axes": ["two_people", "object_handoff", "hands", "busy_scene"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Documentary-style medium shot in a busy restaurant kitchen. A woman chef on the left slides one white plate across a stainless counter; a man chef on the right catches it with both hands, adds exactly one green herb garnish and returns a quick nod. The camera remains at counter height while their identities, uniforms, the single plate and left-right positions stay stable among drifting steam and background cooks.\n\noverall_soundscape: A plate scraping then stopping, one knife tap, ventilation, sizzling pans and restrained kitchen calls.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "action_potter_ten_fingers",
+      "mode": "t2va",
+      "seed": 2026090209,
+      "category": "action_and_interaction",
+      "stress_axes": ["hands", "finger_count", "deformable_material", "continuous_contact"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Photorealistic overhead close-up of a potter's two hands, with ten clearly separated fingers, centering wet terracotta clay on a spinning wheel. Both thumbs press into the center as the fingers raise one smooth cylindrical wall; no hand leaves the clay. Warm side light reveals wet slip, fingerprints and small droplets while the locked camera preserves hand anatomy and circular motion.\n\noverall_soundscape: A steady wheel motor, wet clay friction, small droplets and quiet workshop ambience.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "action_drummer_sync",
+      "mode": "t2va",
+      "seed": 2026090210,
+      "category": "action_and_interaction",
+      "stress_axes": ["fast_hands", "impact_sync", "periodic_motion", "instrument_geometry"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live concert close side angle on a drummer playing a precise four-hit pattern: closed hi-hat, snare, hi-hat, snare. Each wooden stick visibly contacts the correct surface once, the drum head rebounds and the cymbal vibrates naturally. Blue backlight outlines the same drummer and complete kit while a small camera push-in preserves stick count and arm anatomy.\n\noverall_soundscape: Four crisp synchronized percussion hits with short room reflections and no crowd noise.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "animal_retriever_red_ball",
+      "mode": "t2va",
+      "seed": 2026090211,
+      "category": "animals_and_nature",
+      "stress_axes": ["animal_gait", "object_interaction", "identity", "tracking"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Sunlit photorealistic tracking shot of a golden retriever wearing a blue collar in a riverside park. The dog notices one red ball, trots three steps toward it, lowers its head, picks it up once and turns back toward the camera. Its fur, anatomy, collar, ball and path remain coherent as the low camera follows without a cut.\n\noverall_soundscape: Synchronized paw steps on grass, light panting, collar movement, birds and calm moving water.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "animal_eagle_ridge_bank",
+      "mode": "t2va",
+      "seed": 2026090212,
+      "category": "animals_and_nature",
+      "stress_axes": ["wing_anatomy", "aerial_motion", "telephoto_tracking", "large_scale"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Natural-history telephoto shot follows one golden eagle gliding along a snow-dusted mountain ridge. It banks smoothly right, revealing layered flight feathers, then levels both wings above a deep valley. The camera pans at matching speed while the bird's head, beak, feather pattern, two wings and mountain scale remain stable in bright morning light.\n\noverall_soundscape: Strong clean wind, subtle feather movement and distant alpine ambience.\n\nnon_diegetic_music: Low sustained strings that rise slightly during the bank."
+    },
+    {
+      "case_id": "animal_octopus_shell_puzzle",
+      "mode": "t2va",
+      "seed": 2026090213,
+      "category": "animals_and_nature",
+      "stress_axes": ["eight_limbs", "underwater_physics", "object_manipulation", "causal_action"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Detailed underwater macro shot of a red Pacific octopus on a rocky seabed. All eight arms remain distinguishable as two arms grasp a closed scallop shell, twist it open and reveal a small pearl-like stone; the remaining arms anchor naturally to the rocks. The camera makes a slow half-arc while skin texture, suckers, shell halves and drifting particles remain coherent.\n\noverall_soundscape: Muffled underwater movement, shell scraping against stone and a low continuous ocean rumble.\n\nnon_diegetic_music: Sparse glass harmonica tones with long pauses."
+    },
+    {
+      "case_id": "animal_hummingbird_slow_motion",
+      "mode": "t2va",
+      "seed": 2026090214,
+      "category": "animals_and_nature",
+      "stress_axes": ["rapid_wings", "hover_stability", "macro_detail", "flower_interaction"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] High-speed macro footage of a ruby-throated hummingbird hovering beside a red trumpet flower. Its wings beat rapidly with natural motion blur while the head remains stable; the beak enters the flower once, withdraws, and the bird rises a few centimeters. Bright backlight catches iridescent feathers and floating pollen as the camera holds fixed.\n\noverall_soundscape: A rapid wing hum, faint leaf movement and quiet garden insects.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "animal_horses_shallow_water",
+      "mode": "t2va",
+      "seed": 2026090215,
+      "category": "animals_and_nature",
+      "stress_axes": ["multiple_animals", "gait", "water_splashes", "identity_separation"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Wide cinematic sunrise shot of exactly three horses, one black, one chestnut and one white, galloping side by side through shallow coastal water. Their colors and positions remain distinct as hooves create separate splashes and reflections. The camera tracks parallel at medium speed, preserving leg anatomy, horizon and group count throughout the shot.\n\noverall_soundscape: Layered hoofbeats, synchronized splashes, breathing and steady sea wind.\n\nnon_diegetic_music: Broad French-horn notes over slow frame drums."
+    },
+    {
+      "case_id": "physics_domino_causal_chain",
+      "mode": "t2va",
+      "seed": 2026090216,
+      "category": "physics_and_materials",
+      "stress_axes": ["rigid_body_physics", "causal_order", "impact_sync", "focus_pull"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Low macro shot beside a curving line of black dominoes on a white tabletop. One finger tips only the first tile; each tile then strikes the next in strict sequence from foreground to background. The camera remains still while focus travels along the curve, preserving tile count, spacing and upright tiles ahead of the falling front.\n\noverall_soundscape: A clean sequence of individual synchronized clicks moving away from the listener, followed by silence.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "physics_tea_pour_level",
+      "mode": "t2va",
+      "seed": 2026090217,
+      "category": "physics_and_materials",
+      "stress_axes": ["fluid_continuity", "monotonic_fill", "steam", "static_camera"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Locked-off photorealistic macro shot of amber tea pouring in one unbroken stream from a black cast-iron teapot into an empty blue ceramic cup. The liquid level rises continuously to three quarters full, forms concentric ripples and settles after the stream stops. Steam curls upward against a dark background under soft window light.\n\noverall_soundscape: Continuous liquid pouring, a gentle ceramic resonance and a final small drip.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "physics_strawberry_splash",
+      "mode": "t2va",
+      "seed": 2026090218,
+      "category": "physics_and_materials",
+      "stress_axes": ["fast_fluid", "transparency", "refraction", "settling"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] High-speed product macro shot of one ripe strawberry falling into a clear glass of sparkling water. Impact produces a detailed crown splash; separate droplets fall back, bubbles trail from the sinking fruit, and the strawberry settles at the bottom. Strong white backlight reveals consistent glass refraction, seeds and water surface without a cut.\n\noverall_soundscape: One synchronized splash, droplets landing and a short fizz of bubbles.\n\nnon_diegetic_music: A single bright plucked note at impact."
+    },
+    {
+      "case_id": "physics_silk_scarf_fall",
+      "mode": "t2va",
+      "seed": 2026090219,
+      "category": "physics_and_materials",
+      "stress_axes": ["cloth_deformation", "self_occlusion", "specular_material", "gravity"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Slow-motion studio shot of a long emerald silk scarf tossed upward by one hand against a black background. The hand exits; the scarf rises, folds over itself, ripples and descends naturally onto a round stool. One strong side light tracks coherent highlights across the changing folds while the static camera preserves cloth continuity.\n\noverall_soundscape: A soft fabric snap followed by delicate rustling as the scarf settles.\n\nnon_diegetic_music: One airy flute phrase descending with the fabric."
+    },
+    {
+      "case_id": "physics_candle_face_light",
+      "mode": "t2va",
+      "seed": 2026090220,
+      "category": "physics_and_materials",
+      "stress_axes": ["low_light", "flame_dynamics", "face_identity", "illumination_consistency"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Live-action close shot in an otherwise dark stone room. A single candle on the left lights the face of a middle-aged man on the right. He slowly turns toward the flame and shields it with one hand; the flame bends away, then straightens, and its warm highlights move consistently across his cheek, fingers and eyes while faint smoke rises.\n\noverall_soundscape: Quiet breathing, a tiny flame flutter and distant room resonance.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "world_speeder_cliff_chase",
+      "mode": "t2va",
+      "seed": 2026090221,
+      "category": "vehicles_and_worlds",
+      "stress_axes": ["extreme_speed", "single_take", "parallax", "obstacle_avoidance", "reveal"],
+      "provenance": "community-prompt-inspired: https://x.com/umesh_ai/status/2082499539735588916",
+      "prompt": "integrated_multimodal_description: [Shot 1] Cinematic science-fiction single take locks behind one orange speeder already racing along a narrow road through a monumental city carved into a cliff. The vehicle swerves under one collapsing stone arch, then bursts beyond the cliff into a vast waterfall valley. The fast chase camera preserves the same rider, vehicle geometry, road direction and city scale as heat haze, grit and strong parallax give way to rainbow mist.\n\noverall_soundscape: Rising turbine whine, warning beeps, stones striking the road and a final open rush of waterfall wind.\n\nnon_diegetic_music: Rapid low strings and percussion that resolve into one sustained chord at the reveal."
+    },
+    {
+      "case_id": "world_alpine_train_curve",
+      "mode": "t2va",
+      "seed": 2026090222,
+      "category": "vehicles_and_worlds",
+      "stress_axes": ["long_object_geometry", "landscape_parallax", "smoke", "camera_tracking"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Sweeping aerial morning shot follows a red electric train curving across a stone viaduct in the Swiss Alps. All connected carriages remain aligned on the rails while the train passes from left to right; foreground pines create strong parallax, lake reflections remain below and a light veil of snow blows from distant peaks. The drone rises gradually to reveal the full valley.\n\noverall_soundscape: Rhythmic rail noise, a restrained electric motor, mountain wind and one distant horn.\n\nnon_diegetic_music: Slow orchestral strings with a gentle ascending phrase."
+    },
+    {
+      "case_id": "world_drone_forest_waterfall",
+      "mode": "t2va",
+      "seed": 2026090223,
+      "category": "vehicles_and_worlds",
+      "stress_axes": ["fast_camera", "dense_texture", "depth_reveal", "continuous_motion"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Photorealistic FPV drone shot flies low and fast over a dense autumn forest canopy. It skims above orange leaves, banks left around one tall pine, then rises over the ridge to reveal a broad waterfall descending into a misty valley. Forward motion never stops; foliage detail, terrain geometry, horizon and waterfall location remain coherent through the reveal.\n\noverall_soundscape: Layered rushing wind, leaves passing close by and waterfall thunder growing louder near the end.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "world_spacecraft_docking",
+      "mode": "t2va",
+      "seed": 2026090224,
+      "category": "vehicles_and_worlds",
+      "stress_axes": ["mechanical_alignment", "rotation", "space_geometry", "causal_sequence"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Detailed hard-science-fiction wide shot of a compact spacecraft approaching a slowly rotating orbital station above Earth. Short navigation-thruster bursts correct its path; the two circular docking rings align, meet and lock once while solar panels, stars and the curved blue planet remain geometrically stable. The camera tracks beside the spacecraft and stops when the latch closes.\n\noverall_soundscape: Restrained interior machinery hum, three short thruster vibrations and one clear mechanical docking latch.\n\nnon_diegetic_music: Slow expansive electronic pads with a quiet low pulse."
+    },
+    {
+      "case_id": "world_rover_rock_crossing",
+      "mode": "t2va",
+      "seed": 2026090225,
+      "category": "vehicles_and_worlds",
+      "stress_axes": ["six_wheels", "suspension", "terrain_contact", "dust"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Realistic low tracking shot of one six-wheeled planetary rover already approaching a low rock on rust-red terrain beneath a pale sky. The front wheels climb, the articulated suspension compresses in sequence, the rear wheels clear the rock and the body steadies on the other side. Rover geometry, all six wheels, wheel tracks and dust remain consistent.\n\noverall_soundscape: Electric motor whine, suspension joints, wheel contact on grit and thin windy ambience.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "style_watercolor_fisherman_storm",
+      "mode": "t2va",
+      "seed": 2026090226,
+      "category": "stylized_and_animation",
+      "stress_axes": ["watercolor_style", "weather_motion", "character_consistency", "material_style"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Hand-painted watercolor animation of an elderly fisherman in a yellow oilskin steering a tiny blue boat as a sudden squall crosses a gray sea. Loose pigment blooms form waves; he pulls one rope, the triangular sail tightens and the boat crests a wave while his face, coat, boat and brush texture remain stable. The camera pulls out slowly as rain washes diagonally across the paper.\n\noverall_soundscape: Wind, canvas snapping, rope tension, rain and wooden hull creaks synchronized to the motion.\n\nnon_diegetic_music: Low accordion chords and a slow frame drum."
+    },
+    {
+      "case_id": "style_clay_frog_pancakes",
+      "mode": "t2va",
+      "seed": 2026090227,
+      "category": "stylized_and_animation",
+      "stress_axes": ["claymation", "stack_balance", "character_gait", "comedy_timing"],
+      "provenance": "original; theme also appears in fal H3 Max public prompt suggestions",
+      "prompt": "integrated_multimodal_description: [Shot 1] Cheerful claymation kitchen scene. A small green frog wearing a white chef hat walks carefully from left to right while carrying a wobbling stack of exactly five pancakes on a blue plate. One pancake begins to slide; the frog stops, tilts the plate and centers it without dropping anything, then smiles. Finger-molded clay texture, body proportions, pancake count and stop-motion cadence remain consistent.\n\noverall_soundscape: Soft clay footsteps, plate rattles, one rubbery wobble and a tiny relieved croak.\n\nnon_diegetic_music: Playful pizzicato strings at a moderate tempo."
+    },
+    {
+      "case_id": "style_paper_collage_water_cycle",
+      "mode": "t2va",
+      "seed": 2026090228,
+      "category": "stylized_and_animation",
+      "stress_axes": ["paper_collage", "educational_sequence", "state_transition", "labels"],
+      "provenance": "original; category informed by MiniMax's official paper-collage skill",
+      "prompt": "integrated_multimodal_description: [Shot 1] Handmade paper-collage stop-motion explainer on a cream tabletop. A blue paper ocean releases three white vapor spirals upward toward a cotton cloud; the cloud darkens, paper raindrops fall onto a green mountain and one blue river strip unfolds back to the ocean. A small stable label reading \"WATER CYCLE\" remains at the top while each causal stage occurs once in order.\n\noverall_soundscape: Paper sliding, soft taps for raindrops and a gentle pouring sound as the river reaches the ocean.\n\nnon_diegetic_music: Light marimba notes, one phrase per stage."
+    },
+    {
+      "case_id": "style_pixel_runner_san_francisco",
+      "mode": "t2va",
+      "seed": 2026090229,
+      "category": "stylized_and_animation",
+      "stress_axes": ["pixel_art", "side_scroll", "looping_background", "jump_timing"],
+      "provenance": "original; theme appears in fal H3 Max public prompt suggestions",
+      "prompt": "integrated_multimodal_description: [Shot 1] Crisp 16-bit pixel-art endless runner viewed from the side. A courier in a purple jacket runs right along a San Francisco hill, jumps once over a rolling cable-car bell, lands and continues while the Golden Gate Bridge, pastel houses and bay scroll in layered parallax. Sprite scale, limited palette, hard pixel edges and character animation remain consistent with no drift toward 3D.\n\noverall_soundscape: Retro footstep blips, one jump tone, one metallic bell and an eight-bit wind loop.\n\nnon_diegetic_music: Up-tempo chiptune with square-wave melody and simple bass."
+    },
+    {
+      "case_id": "style_stained_glass_princess",
+      "mode": "t2va",
+      "seed": 2026090230,
+      "category": "stylized_and_animation",
+      "stress_axes": ["stained_glass_style", "human_anatomy", "colored_light", "camera_orbit"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Luminous stained-glass animation inside a stone cathedral. A princess made of jewel-toned glass raises one articulated hand and turns toward a rose window as moving sunlight projects coherent red, blue and gold patterns across her ornate gown and the floor. The camera performs a slow quarter orbit while her face, crown, lead outlines, hand anatomy and window geometry remain intact.\n\noverall_soundscape: Soft fabric-like movement, distant cathedral air and delicate glass chimes.\n\nnon_diegetic_music: Quiet wordless choir with sustained notes."
+    },
+    {
+      "case_id": "commercial_perfume_ribbon",
+      "mode": "t2va",
+      "seed": 2026090231,
+      "category": "commercial_and_graphics",
+      "stress_axes": ["product_geometry", "glass", "cloth", "brand_text"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Premium studio product shot of one faceted clear perfume bottle labeled \"AURELIA\" on black polished stone. A gold silk ribbon sweeps around the stationary bottle in one spiral, tiny droplets collect on the glass and a warm light travels from left to right. The camera makes a restrained push-in while the bottle shape, readable label, reflections and ribbon continuity remain stable.\n\noverall_soundscape: A soft fabric sweep, two delicate glass tones and one water droplet.\n\nnon_diegetic_music: Minimal harp harmonics over a low sustained synth."
+    },
+    {
+      "case_id": "commercial_burger_cola_showdown",
+      "mode": "t2va",
+      "seed": 2026090232,
+      "category": "commercial_and_graphics",
+      "stress_axes": ["food_detail", "two_character_interaction", "comedic_action", "product_identity"],
+      "provenance": "community-theme-inspired: https://x.com/riyazmd774/status/2082519642145485080",
+      "prompt": "integrated_multimodal_description: [Shot 1] Playful cinematic tabletop commercial stages a glossy cheeseburger on the left and a cold red cola can on the right as tiny heroic characters. The burger slides forward, the can spins once and sprays a curved sparkling arc that lands beside, not on, the burger. Both stop face to face under dramatic rim light as the camera rapidly pushes in; bun layers, can shape and left-right identities remain stable.\n\noverall_soundscape: A low sliding rumble, one metallic spin, synchronized fizzy spray and a clean comic impact.\n\nnon_diegetic_music: Exaggerated brass duel motif ending with a short cymbal choke."
+    },
+    {
+      "case_id": "commercial_watch_mechanism",
+      "mode": "t2va",
+      "seed": 2026090233,
+      "category": "commercial_and_graphics",
+      "stress_axes": ["macro_mechanics", "gear_causality", "metal_reflections", "precision"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Extreme macro luxury-watch film travels through an exposed mechanical movement. One gold gear turns clockwise, drives a smaller steel gear counterclockwise and advances the red seconds hand by five clear ticks. The camera arcs slowly above polished bridges while teeth remain meshed, screws stay fixed and moving specular highlights follow the metal geometry.\n\noverall_soundscape: Five precise synchronized ticks, a quiet mechanical whir and subtle metal resonance.\n\nnon_diegetic_music: Sparse low piano notes with wide spacing."
+    },
+    {
+      "case_id": "commercial_kinetic_type_sign",
+      "mode": "t2va",
+      "seed": 2026090234,
+      "category": "commercial_and_graphics",
+      "stress_axes": ["text_rendering", "kinetic_typography", "sequential_assembly", "layout"],
+      "provenance": "original; motion-poster theme informed by https://x.com/LudovicCreator/status/2083628852165672988",
+      "prompt": "integrated_multimodal_description: [Shot 1] Clean graphic-design animation on a white background. Thin navy lines draw one rectangular frame; large orange letters assemble in order to form the exact word \"ORBIT\" while a small blue circle travels around them and stops above the letter I. The completed typography remains readable and motionless as the camera performs a tiny final push-in; no extra letters or objects appear.\n\noverall_soundscape: Five light typewriter clicks, a smooth electronic sweep and one soft final lock sound.\n\nnon_diegetic_music: Minimal electronic pulse at a steady moderate tempo."
+    },
+    {
+      "case_id": "commercial_ramen_one_take",
+      "mode": "t2va",
+      "seed": 2026090235,
+      "category": "commercial_and_graphics",
+      "stress_axes": ["food", "hands", "steam", "continuous_camera"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Warm photorealistic food-commercial close-up begins above a finished black bowl of ramen with one halved egg and three slices of pork already arranged in glossy broth. A cook's hand adds one small pinch of scallions, then chopsticks lift one continuous bundle of noodles as steam curls around it. The camera lowers slightly in one smooth move while the ingredients and bowl remain coherent.\n\noverall_soundscape: Gentle broth simmer, scallions landing softly and wet noodles lifting.\n\nnon_diegetic_music: Light acoustic guitar and brushed percussion at a relaxed tempo."
+    },
+    {
+      "case_id": "diagnostic_mug_occlusion",
+      "mode": "t2va",
+      "seed": 2026090236,
+      "category": "diagnostic_consistency",
+      "stress_axes": ["object_permanence", "full_occlusion", "static_camera", "long_range_memory"],
+      "provenance": "original diagnostic pattern",
+      "prompt": "integrated_multimodal_description: [Shot 1] Locked-off photorealistic shot of one red enamel mug centered on a marked wooden table in even daylight. A person in a gray sweater walks left to right between the camera and table, fully hiding the mug for one second, then exits. The same single mug must reappear at exactly the original mark with unchanged color, handle direction, size and lighting; the person does not touch it.\n\noverall_soundscape: Four footsteps, soft sweater movement and quiet room tone.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "diagnostic_five_ducks_remove_middle",
+      "mode": "t2va",
+      "seed": 2026090237,
+      "category": "diagnostic_consistency",
+      "stress_axes": ["exact_count", "object_removal", "hands", "state_persistence"],
+      "provenance": "original diagnostic pattern",
+      "prompt": "integrated_multimodal_description: [Shot 1] Static overhead studio shot of exactly five yellow rubber ducks arranged in one straight row in a blue tub. A single human hand enters from below, grasps only the middle third duck and removes it completely from frame, leaving exactly four ducks with an empty gap at the center. No duck duplicates, changes color or moves into the gap; even white lighting remains constant.\n\noverall_soundscape: Gentle water movement, one rubber squeak and a few droplets as the duck leaves frame.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "diagnostic_mirror_lipstick",
+      "mode": "t2va",
+      "seed": 2026090238,
+      "category": "diagnostic_consistency",
+      "stress_axes": ["reflection", "identity", "hand_face_contact", "spatial_consistency"],
+      "provenance": "original diagnostic pattern",
+      "prompt": "integrated_multimodal_description: [Shot 1] Photorealistic bathroom medium shot shows a woman and her clear mirror reflection. She raises one red lipstick in her right hand, draws a short line across her lower lip and caps it. Every reflected hand, facial movement, lipstick position and blink matches at the same moment with correct mirror geometry. The cool fluorescent camera view remains locked and both real and reflected identities stay identical.\n\noverall_soundscape: Lipstick cap clicking, faint sleeve movement and a steady bathroom ventilation hum.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "diagnostic_crossing_crowd",
+      "mode": "t2va",
+      "seed": 2026090239,
+      "category": "diagnostic_consistency",
+      "stress_axes": ["crowd", "many_small_subjects", "two_way_flow", "scene_structure"],
+      "provenance": "original",
+      "prompt": "integrated_multimodal_description: [Shot 1] Locked wide shot from a second-floor window overlooks a busy Tokyo crossing at blue hour. Dozens of pedestrians with umbrellas flow along two diagonal crosswalks in opposing directions, remaining individual and obeying the painted paths while traffic waits. Light rain creates stable neon reflections; the street grid, signs, building facades and camera position do not warp.\n\noverall_soundscape: Layered footsteps, rain, restrained crowd conversation, crossing beeps and distant idling traffic.\n\nnon_diegetic_music: N/A"
+    },
+    {
+      "case_id": "diagnostic_static_mountain_lake",
+      "mode": "t2va",
+      "seed": 2026090240,
+      "category": "diagnostic_consistency",
+      "stress_axes": ["static_control", "temporal_stability", "fine_detail", "subtle_motion"],
+      "provenance": "original control",
+      "prompt": "integrated_multimodal_description: [Shot 1] Locked-off ultra-wide photorealistic view of a still mountain lake at first light. Snow peaks and dark pines remain sharply reflected in glassy water. The camera never moves and the landscape geometry never changes; only a thin layer of mist drifts slowly left and one faint ripple expands near the shore before disappearing. No people, boats, animals or buildings are present.\n\noverall_soundscape: Very quiet lake ambience, one distant bird and a barely audible breeze.\n\nnon_diegetic_music: N/A"
+    }
+  ]
+}

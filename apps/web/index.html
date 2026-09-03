@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>H3-Flash</title>
+  <style>
+    :root { color-scheme: dark; --bg:#070a0f; --panel:#101721; --line:#263445; --text:#f4f8ff; --muted:#9aaabd; --accent:#69e0b4; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:radial-gradient(circle at 85% 0,#173747 0,transparent 36rem),var(--bg); color:var(--text); font:15px/1.5 Inter,system-ui,sans-serif; }
+    main { width:min(1480px,calc(100% - 32px)); margin:auto; padding:38px 0 64px; }
+    header { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+    h1 { font-size:clamp(38px,7vw,76px); line-height:.9; letter-spacing:-.06em; margin:0; }
+    .status { margin-left:auto; border:1px solid var(--line); border-radius:999px; padding:7px 11px; color:var(--muted); }
+    .story-link { margin-left:auto; color:var(--muted); text-decoration:none; border-bottom:1px solid #4b596a; }
+    .story-link + .status { margin-left:0; }
+    .ready { color:var(--accent); border-color:#387860; }
+    .panel { background:linear-gradient(145deg,#121b27,#0c1119); border:1px solid var(--line); border-radius:20px; padding:20px; box-shadow:0 20px 70px #0005; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(430px,.65fr); gap:20px; align-items:start; }
+    .viewer { position:sticky; top:20px; }
+    .video-stage { display:grid; place-items:center; width:100%; aspect-ratio:16/9; overflow:hidden; background:#030507; border:1px solid #1b222d; border-radius:14px; transition:width .2s ease,aspect-ratio .2s ease; }
+    .video-stage.portrait { width:min(100%,calc((100vh - 190px) * 9 / 16)); aspect-ratio:9/16; margin-inline:auto; }
+    .video-placeholder { grid-area:1/1; color:var(--muted); text-align:center; padding:30px; }
+    .job-copy { margin-top:14px; }
+    textarea { width:100%; min-height:190px; resize:vertical; border:0; outline:0; background:transparent; color:var(--text); font:18px/1.55 inherit; }
+    .row { display:flex; gap:12px; align-items:center; border-top:1px solid var(--line); padding-top:16px; }
+    label { color:var(--muted); }
+    input,select { background:#080d14; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:10px; }
+    input { width:150px; }
+    select { min-width:150px; }
+    button { margin-left:auto; border:0; border-radius:11px; padding:11px 18px; background:var(--accent); color:#04110c; font-weight:800; cursor:pointer; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .presets { display:flex; flex-wrap:wrap; gap:8px; margin:15px 0 26px; }
+    .presets button { margin:0; padding:7px 10px; background:#13212b; color:var(--muted); border:1px solid var(--line); font-weight:600; }
+    .prompt-head { display:flex; align-items:baseline; gap:10px; margin-bottom:5px; }
+    .prompt-head span,.prompt-note { color:var(--muted); font-size:13px; }
+    .prompt-head a { margin-left:auto; color:var(--accent); text-decoration:none; font-size:13px; }
+    .prompt-tools { padding:15px 0; border-top:1px solid var(--line); }
+    .prompt-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .enhance { margin:0; width:100%; background:#183328; color:var(--accent); border:1px solid #315e4e; }
+    .deep-enhance { background:var(--accent); color:#04110c; }
+    .prompt-note { min-height:20px; margin:0 0 14px; }
+    .prompt-note.ready { color:var(--accent); }
+    .reference-field { display:grid; gap:8px; padding:14px 0 16px; border-top:1px solid var(--line); }
+    .reference-head { display:flex; align-items:baseline; gap:8px; }
+    .reference-head span { color:var(--muted); font-size:12px; }
+    .reference-input { display:flex; align-items:center; gap:12px; min-height:72px; padding:10px; border:1px dashed #3b5369; border-radius:12px; cursor:pointer; background:#090f17; }
+    .reference-input:hover { border-color:var(--accent); }
+    .reference-input input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+    .reference-input img { display:none; width:84px; height:54px; object-fit:cover; border-radius:7px; background:#000; }
+    .reference-input.has-image img { display:block; }
+    .reference-input strong { color:var(--text); }
+    .reference-input span { color:var(--muted); font-size:12px; }
+    .remove-frame { display:none; margin-left:auto; padding:7px 10px; background:#20171a; color:#ffb4b4; border:1px solid #60343b; }
+    .reference-input.has-image .remove-frame { display:block; }
+    .output-tools { display:flex; align-items:end; gap:12px; padding:0 0 16px; }
+    .output-tools label { display:grid; gap:5px; font-size:12px; }
+    .compile-note { color:var(--muted); font-size:12px; margin-left:auto; max-width:310px; }
+    #job { display:block; }
+    .metrics { color:var(--muted); margin:5px 0 0; }
+    video { grid-area:1/1; width:100%; height:100%; object-fit:contain; display:none; background:#000; }
+    .error { color:#ff9090; white-space:pre-wrap; }
+    footer { color:var(--muted); margin-top:18px; font-size:13px; }
+    @media(max-width:1050px) { .workspace{grid-template-columns:1fr}.viewer{position:static}.settings{min-width:0}.video-stage.portrait{width:min(100%,calc(78vh * 9 / 16))} }
+    @media(max-width:650px) { main{padding-top:28px} header{align-items:flex-start}.status{font-size:12px}.row,.output-tools{flex-wrap:wrap}button{margin-left:0;width:100%}.prompt-actions{grid-template-columns:1fr}.prompt-head{align-items:flex-start;flex-wrap:wrap}.prompt-head a,.compile-note{margin-left:0} }
+  </style>
+</head>
+<body>
+<main>
+  <header><div><div style="color:var(--accent);font-weight:800">FluxMatrix</div><h1>H3-Flash</h1></div><a class="story-link" href="/story/">Interactive story</a><div id="service" class="status">Connecting…</div></header>
+  <div class="workspace">
+    <section id="job" class="panel viewer">
+      <div id="videoStage" class="video-stage"><div id="videoPlaceholder" class="video-placeholder">Your generated video will appear here.</div><video id="video" controls playsinline preload="auto"></video></div>
+      <div class="job-copy"><strong id="jobStatus">Ready for a prompt</strong><div id="metrics" class="metrics">Choose a preset or describe your own shot.</div><div id="error" class="error"></div></div>
+    </section>
+    <div class="settings">
+      <div class="presets">
+        <button data-prompt="A rescue rider races a red snowmobile toward the camera across an Icelandic glacial lake as one immense glacier face collapses behind. The rider turns around one slab, clears a narrow fissure, lands, and escapes." data-look="cinematic" data-camera="tracking" data-sound="A snowmobile engine under load, spreading ice cracks, one deep glacial impact, frozen spray, and a synchronized suspension landing." data-music="cinematic">Glacier escape</button>
+        <button data-prompt="A red-panda courier in a yellow technical jacket runs through a minimalist elevated metro tunnel, jumps over one maintenance robot, lands, and continues as a silver train passes behind glass." data-look="game" data-camera="tracking" data-sound="Rhythmic shoes, a soft robot chirp, one airy jump, a firm landing, and the stereo rush of a passing train." data-music="electronic">Metro runner</button>
+        <button data-prompt="A capybara chef stands beside one giant dumpling in a pristine modern kitchen, gently pokes it with a wooden spoon, watches it jiggle and release steam, then smiles proudly at the camera." data-look="character" data-camera="push" data-sound="Quiet kitchen ambience, one wooden tap, soft doughy jiggles, a steam puff, and a pleased capybara chirp." data-music="playful">Giant dumpling</button>
+        <button data-prompt="One adult Chinese female dancer in a crimson sculptural top performs a fluid pop-dance phrase inside a sunlit minimalist art-museum atrium, advances toward the lens, and finishes with a playful blink and confident smile." data-look="commercial" data-camera="push" data-sound="Synchronized fabric movement, controlled breathing, and soft shoe impacts in the airy atrium." data-music="electronic">Studio dance</button>
+      </div>
+      <form id="form" class="panel">
+    <div class="prompt-head"><strong>Prompt</strong><span>Write an idea or paste a complete H3 prompt</span><a href="https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/h3-prompt-writing" target="_blank" rel="noreferrer">MiniMax prompt guide ↗</a></div>
+    <textarea id="prompt" required placeholder="Describe the main subject, scene, action, and intended result…"></textarea>
+    <div class="prompt-tools">
+      <div class="prompt-actions"><button id="quickEnhance" class="enhance" type="button">Quick structure</button><button id="aiEnhance" class="enhance deep-enhance" type="button" disabled>AI enhance · Qwen3.5-4B</button></div>
+    </div>
+    <p id="promptNote" class="prompt-note">AI enhance follows MiniMax's H3 prompt format and normally finishes in under one second. Quick structure is the instant fallback.</p>
+    <div class="reference-field">
+      <div class="reference-head"><strong>Start frame</strong><span>Optional · anchors the first frame with H3 I2VA</span></div>
+      <label id="referenceInput" class="reference-input" for="firstFrame"><input id="firstFrame" type="file" accept="image/jpeg,image/png,image/webp"><img id="framePreview" alt="Selected start frame"><span id="frameLabel"><strong>Choose an image</strong><br>JPEG, PNG, or WebP · up to 12 MiB</span><button id="removeFrame" class="remove-frame" type="button">Remove</button></label>
+    </div>
+    <div class="output-tools">
+      <label>Canvas<select id="resolution"><option value="768p-landscape">768p · landscape</option><option value="768p-portrait">768p · portrait</option><option value="480p-landscape">480p · landscape</option><option value="480p-portrait">480p · portrait</option></select></label>
+      <label>Duration<select id="duration"><option value="5">5 seconds</option><option value="10">10 seconds</option><option value="15">15 seconds</option></select></label>
+      <span class="compile-note">The first request for a new canvas or duration may compile before generation.</span>
+    </div>
+    <div class="row"><label for="seed">Seed</label><input id="seed" type="number" min="0" placeholder="Random"><button id="generate" disabled>Generate video</button></div>
+      </form>
+    </div>
+  </div>
+  <footer>Runs locally on your H3-Flash worker. Requests are processed one at a time on 8×B200; prompts and outputs stay on this machine.</footer>
+</main>
+<script>
+const service=document.querySelector('#service'),form=document.querySelector('#form'),promptBox=document.querySelector('#prompt'),seed=document.querySelector('#seed'),submit=document.querySelector('#generate'),jobPanel=document.querySelector('#job'),jobStatus=document.querySelector('#jobStatus'),metrics=document.querySelector('#metrics'),errorBox=document.querySelector('#error'),video=document.querySelector('#video'),videoStage=document.querySelector('#videoStage'),videoPlaceholder=document.querySelector('#videoPlaceholder'),quickEnhance=document.querySelector('#quickEnhance'),aiEnhance=document.querySelector('#aiEnhance'),promptNote=document.querySelector('#promptNote'),resolution=document.querySelector('#resolution'),duration=document.querySelector('#duration'),firstFrame=document.querySelector('#firstFrame'),referenceInput=document.querySelector('#referenceInput'),framePreview=document.querySelector('#framePreview'),frameLabel=document.querySelector('#frameLabel'),removeFrame=document.querySelector('#removeFrame');
+let ready=false,enhancerReady=false,enhancing=false,generating=false,requestStartedAt=0,currentJobId='';
+let composer={look:'cinematic',camera:'tracking',music:'none',sound:''};
+function updateActions(){submit.disabled=!ready||generating;aiEnhance.disabled=!ready||!enhancerReady||enhancing;quickEnhance.disabled=enhancing}
+function setViewerOrientation(portrait){videoStage.classList.toggle('portrait',portrait)}
+resolution.addEventListener('change',()=>{const portrait=resolution.value.endsWith('-portrait');setViewerOrientation(portrait);if(firstFrame.files.length&&framePreview.naturalWidth){const framePortrait=framePreview.naturalHeight>framePreview.naturalWidth;if(framePortrait!==portrait){promptNote.textContent='The selected start frame has a different orientation and will be fitted to this canvas.';promptNote.classList.remove('ready')}}});
+video.addEventListener('loadedmetadata',()=>setViewerOrientation(video.videoHeight>video.videoWidth));
+let framePreviewUrl='';
+function clearFirstFrame(){firstFrame.value='';if(framePreviewUrl)URL.revokeObjectURL(framePreviewUrl);framePreviewUrl='';framePreview.removeAttribute('src');referenceInput.classList.remove('has-image');frameLabel.innerHTML='<strong>Choose an image</strong><br>JPEG, PNG, or WebP · up to 12 MiB'}
+firstFrame.addEventListener('change',()=>{const file=firstFrame.files[0];if(!file){clearFirstFrame();return}if(file.size>12*1024*1024){clearFirstFrame();promptNote.textContent='Start frame must be 12 MiB or smaller.';promptNote.classList.remove('ready');return}if(framePreviewUrl)URL.revokeObjectURL(framePreviewUrl);framePreviewUrl=URL.createObjectURL(file);framePreview.onload=()=>{const quality=resolution.value.startsWith('480p')?'480p':'768p';const orientation=framePreview.naturalHeight>framePreview.naturalWidth?'portrait':'landscape';resolution.value=`${quality}-${orientation}`;setViewerOrientation(orientation==='portrait')};framePreview.src=framePreviewUrl;referenceInput.classList.add('has-image');frameLabel.innerHTML=`<strong>${file.name}</strong><br>${(file.size/1024/1024).toFixed(2)} MiB · first frame anchored`;promptNote.textContent='Start frame selected. AI enhance will write an image-to-video prompt around it.';promptNote.classList.remove('ready')});
+removeFrame.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();clearFirstFrame()});
+async function refreshService(){try{const r=await fetch('/api/status',{cache:'no-store'}),s=await r.json();ready=s.ready;enhancerReady=s.capabilities?.prompt_enhancer?.enabled===true;service.textContent=s.ready?`${s.profile.toUpperCase()} ready`:`${s.phase}…`;service.classList.toggle('ready',ready)}catch{ready=false;enhancerReady=false;service.textContent='Disconnected'}finally{updateActions()}}
+setInterval(refreshService,1500);refreshService();
+const looks={cinematic:'Live-action, contemporary large-format cinematic realism with natural lighting, resolved material detail, controlled highlights, and restrained color grading.',commercial:'Premium contemporary commercial-film realism with a clean composition, luminous natural skin tones, and controlled highlights.',character:'Premium contemporary 3D character animation with finely resolved materials, clean geometry, and stable character design.',game:'Polished next-generation 3D game cinematic with physically based materials, finely resolved detail, clean geometry, and stable edges.',documentary:'Photorealistic documentary cinematography with natural light, authentic textures, and restrained color grading.'};
+const cameras={tracking:'A stabilized tracking camera follows the main subject at a readable pace.',push:'A fixed eye-level camera makes a slow, controlled push toward the main subject.',static:'The camera holds a stable static composition while the action develops clearly within the frame.',arc:'A stabilized camera makes one controlled arc around the main subject while keeping the action readable.',handheld:'A restrained handheld camera follows the main subject with natural movement and controlled shake.'};
+const scores={none:'N/A',cinematic:'Restrained low strings and sparse percussion build with the action, then resolve cleanly.',electronic:'A minimal contemporary electronic beat places precise accents on the main movements without overpowering natural sound.',playful:'Minimal playful marimba and light percussion place clean accents on the action and final reaction.'};
+function isStructuredPrompt(value){return ['integrated_multimodal_description:','overall_soundscape:','non_diegetic_music:'].every(field=>value.includes(field))}
+function enhancePrompt(){const brief=promptBox.value.trim();if(!brief){promptBox.focus();promptNote.textContent='Add a short idea first.';promptNote.classList.remove('ready');return}if(isStructuredPrompt(brief)){promptNote.textContent='This prompt already follows the official H3 three-field structure. You can edit it before generation.';promptNote.classList.add('ready');return}const ambience=composer.sound||'Natural location ambience and clear synchronized physical sounds match each visible action across the stereo field.';promptBox.value=`integrated_multimodal_description: [Shot 1] ${looks[composer.look]} ${brief} ${cameras[composer.camera]} The action develops from a clear setup through one main movement to a readable final result or reaction in one continuous shot. Preserve the same primary-subject identity, appearance, proportions, spatial relationships, travel direction, and scene geometry throughout.\n\noverall_soundscape: ${ambience}\n\nnon_diegetic_music: ${scores[composer.music]}`;promptNote.textContent='H3-ready prompt created locally. Review or edit it, then generate.';promptNote.classList.add('ready');promptBox.focus()}
+async function deepEnhancePrompt(){const brief=promptBox.value.trim();if(!brief){promptBox.focus();promptNote.textContent='Add a short idea first.';promptNote.classList.remove('ready');return}enhancing=true;updateActions();promptNote.textContent='Building an H3-ready prompt with Qwen3.5-4B…';promptNote.classList.remove('ready');try{const r=await fetch('/api/prompts/enhance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:brief,duration:Number(duration.value),mode:firstFrame.files.length?'i2va':'t2va'})}),j=await r.json();if(!r.ok)throw new Error(j.error||`HTTP ${r.status}`);promptBox.value=j.prompt;promptNote.textContent=j.cached?'Loaded the matching enhanced prompt from memory. Review or edit it before generation.':`AI enhance: ${j.seconds.toFixed(2)}s · ${j.output_tokens} output tokens. Review or edit it before generation.`;promptNote.classList.add('ready');promptBox.focus()}catch(e){promptNote.textContent=`AI enhance failed: ${e.message}. Quick structure remains available.`;promptNote.classList.remove('ready')}finally{enhancing=false;updateActions()}}
+quickEnhance.onclick=enhancePrompt;aiEnhance.onclick=deepEnhancePrompt;
+document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>{promptBox.value=b.dataset.prompt;composer={look:b.dataset.look,camera:b.dataset.camera,music:b.dataset.music,sound:b.dataset.sound};promptNote.classList.remove('ready');enhancePrompt()});
+form.onsubmit=async e=>{e.preventDefault();if(!ready||generating)return;generating=true;requestStartedAt=performance.now();currentJobId='';updateActions();setViewerOrientation(resolution.value.endsWith('-portrait'));video.pause();video.style.display='none';video.removeAttribute('src');video.load();videoPlaceholder.style.display='block';videoPlaceholder.textContent='Generating video…';errorBox.textContent='';jobStatus.textContent='Submitting…';metrics.textContent='';const request={prompt:promptBox.value,resolution:resolution.value,duration:Number(duration.value)};if(seed.value!=='')request.seed=Number(seed.value);try{let body,headers={};if(firstFrame.files.length){body=new FormData();body.append('request',new Blob([JSON.stringify(request)],{type:'application/json'}));body.append('first_frame',firstFrame.files[0],firstFrame.files[0].name)}else{body=JSON.stringify(request);headers['Content-Type']='application/json'}const r=await fetch('/api/jobs',{method:'POST',headers,body}),j=await r.json();if(!r.ok)throw new Error(j.error||`HTTP ${r.status}`);currentJobId=j.job_id;poll(j.job_id,j.status)}catch(e){generating=false;jobStatus.textContent='Failed';videoPlaceholder.textContent='Generation failed.';errorBox.textContent=e.message;updateActions()}};
+async function poll(id,since){try{const query=since==='queued'||since==='running'?`?wait=1&since=${since}`:'';const r=await fetch(`/api/jobs/${id}${query}`,{cache:'no-store'}),j=await r.json();if(!r.ok)throw new Error(j.error||`HTTP ${r.status}`);if(currentJobId!==id)return;const shape=`${j.width}×${j.height} · ${(j.num_frames/j.fps).toFixed(2)}s`;jobStatus.textContent=j.status[0].toUpperCase()+j.status.slice(1);metrics.textContent=j.status==='queued'?`${shape} · queue position ${j.queue_position||1}`:j.status==='running'?`${shape} · seed ${j.seed} · ${j.first_shape_warmup?'first-use compile and generate':'generating'} on 8×B200`:`${shape} · seed ${j.seed}`;if(j.status==='succeeded'){const detectedAt=performance.now(),server=`generation ${j.generation_seconds.toFixed(3)}s · server E2E ${j.request_seconds.toFixed(3)}s`;metrics.textContent=`${shape} · ${server} · preparing playback…`;video.addEventListener('canplay',()=>{if(currentJobId!==id)return;const playableAt=performance.now(),total=(playableAt-requestStartedAt)/1000,delivery=(playableAt-detectedAt)/1000;metrics.textContent=`${shape} · ${server} · click → playable ${total.toFixed(3)}s · playback delivery ${delivery.toFixed(3)}s`;jobStatus.textContent='Ready';video.play().then(()=>{if(currentJobId===id)jobStatus.textContent='Playing'}).catch(()=>{if(currentJobId===id)jobStatus.textContent='Ready — press play for audio'})},{once:true});video.src=j.video_url;videoPlaceholder.style.display='none';video.style.display='block';video.load();generating=false;updateActions();return}if(j.status==='failed'){videoPlaceholder.textContent='Generation failed.';errorBox.textContent=j.error;generating=false;updateActions();return}poll(id,j.status)}catch(e){if(currentJobId!==id)return;jobStatus.textContent='Connection error';videoPlaceholder.textContent='Waiting for the worker…';errorBox.textContent=e.message;setTimeout(()=>poll(id,since),500)}}
+</script>
+</body>
+</html>

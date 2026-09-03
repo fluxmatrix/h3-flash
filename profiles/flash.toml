@@ -1,0 +1,6 @@
+schema_version = 1
+id = "flash"
+status = "technical_measured_pending_human_review"
+parent = "fast-turbo4-bf16-dense-8xb200-ffmpeg"
+quality_class = "approximate"
+description = "Public FLASH lane: LOSSLESS plus the locked LightX2V Turbo4 LoRA and four Transformer evaluations."

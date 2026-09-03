@@ -1,0 +1,26 @@
+.venv/
+.tools/
+.ffmpeg/
+.deps/
+.weights/
+artifacts/
+benchmark-results/
+conversation/
+evidence/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+uv.lock
+*.log
+
+# Local credentials and deployment overrides must never enter the repository.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

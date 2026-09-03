@@ -1,0 +1,22 @@
+schema_version = 1
+id = "lossless-1xb200"
+status = "experimental"
+parent = "official"
+quality_class = "numerically_equivalent"
+description = "Cumulative single-B200 lossless candidate with resident exact caches and GPU-side output preparation."
+
+[optimizations]
+persistent_pinned_d2h = true
+rank0_gpu_video_reorder = true
+invariant_caches = true
+transformer_fusions = true
+# Kept as an implemented ablation, but disabled in the cumulative profile:
+# Diffusers' fused GEMM was slower on both the single-GPU Gate4 and the older
+# SP8 sweep.  Lossless profiles include only positive-return mechanisms.
+fused_qkv = false
+
+[correctness]
+_replace = true
+contract = "numerically_equivalent"
+tensor_gate = "bounded_numeric_error"
+quality_gate = "broad40_blind_review"

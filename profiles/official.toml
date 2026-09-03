@@ -1,0 +1,38 @@
+schema_version = 1
+id = "official"
+status = "measured_local"
+quality_class = "reference"
+description = "Official BF16 weights and 50-step dense inference reference."
+
+[execution]
+accelerator = "NVIDIA B200"
+accelerator_count = 1
+generation_device = "cuda:0"
+text_device = "cuda:0"
+topology = "single_gpu_sequential"
+
+[model]
+family = "MiniMax-H3"
+variant = "FL2VA"
+transformer = "official_bf16"
+text_encoder = "official_bf16"
+video_vae = "official"
+audio_vae = "official"
+turbo_lora = false
+
+[sampling]
+api_num_inference_steps = 50
+model_evaluations = 49
+count_semantics = "sigma_grid_points_including_terminal_zero"
+schedule = "official"
+
+[attention]
+semantics = "dense"
+backend = "official"
+
+[correctness]
+contract = "reference"
+
+[provenance]
+upstreams_lock = "upstreams"
+model_lock = "models.official"

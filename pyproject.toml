@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=80,<82"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "h3-flash"
+version = "0.0.0"
+description = "Open full-stack inference acceleration for MiniMax H3"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12,<3.13"
+authors = [{ name = "FluxMatrix" }]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Environment :: GPU :: NVIDIA CUDA",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.scripts]
+h3-flash = "h3_flash.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "ruff==0.12.12"]
+
+[project.urls]
+Repository = "https://github.com/fluxmatrix/h3-flash"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.data-files]
+"h3_flash/profiles" = ["profiles/*.toml"]
+"h3_flash/configs" = ["configs/*.toml"]
+"h3_flash/locks" = ["locks/*.toml"]
+"h3_flash/requirements" = ["requirements/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88

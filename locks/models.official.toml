@@ -1,0 +1,217 @@
+schema_version = 1
+status = "locked"
+profile_family = "official_diffusers"
+repo = "MiniMaxAI/MiniMax-H3"
+revision = "42ed227ee7df40d41602854ae760620d6eb651fe"
+license = "minimax-h3-community-license-agreement"
+total_weight_bytes = 144016405316
+note = "Diffusers-layout BF16 artifacts used by the official H3-Flash reference; metadata and configs are fixed by the repository revision."
+
+[[downloads]]
+repo = "MiniMaxAI/MiniMax-H3"
+revision = "42ed227ee7df40d41602854ae760620d6eb651fe"
+local_prefix = "official-diffusers"
+include = [
+  "model_index.json",
+  "modular_model_index.json",
+  "audio_scheduler/*",
+  "audio_vae/*",
+  "processor/*",
+  "scheduler/*",
+  "text_encoder/*",
+  "tokenizer/*",
+  "transformer/*",
+  "vae/*",
+]
+
+[[files]]
+path = "audio_vae/diffusion_pytorch_model.safetensors"
+local_path = "official-diffusers/audio_vae/diffusion_pytorch_model.safetensors"
+bytes = 605429340
+sha256 = "52c59e67ba8de5477c81bfbced0327aabf500f1bfdeefd5ee754529241cb26cb"
+
+[[files]]
+path = "text_encoder/model-00001-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00001-of-00014.safetensors"
+bytes = 4932328944
+sha256 = "6b9dfbc930e505402ae9d7e5091a9d7d656cda5f34614f01cfe70bfb0cca27cb"
+
+[[files]]
+path = "text_encoder/model-00002-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00002-of-00014.safetensors"
+bytes = 4875990528
+sha256 = "d8bb44b4ff303fe76fe9e894022fb3dc71b15a2e716592790fe0e3c3e60478fa"
+
+[[files]]
+path = "text_encoder/model-00003-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00003-of-00014.safetensors"
+bytes = 4875990552
+sha256 = "54f22e8b3168f8dc962fac0d313607ebf52a12b433d4cf3098a0d82d9f042940"
+
+[[files]]
+path = "text_encoder/model-00004-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00004-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "ad09c74d3c13ee29b5d0d84548fd8a3424a651564eaccd519946c296e59c557f"
+
+[[files]]
+path = "text_encoder/model-00005-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00005-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "fc993c8a0e2a5b0570f383e1a95dc3a1281d1b224b6f3ee908f4827941e1dfc2"
+
+[[files]]
+path = "text_encoder/model-00006-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00006-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "82f05620d1f718a90c362b221d6a184ff1a0f53301d706882d3df49695fa1974"
+
+[[files]]
+path = "text_encoder/model-00007-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00007-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "fb91da8cb01ff4de3eef0eab1c3e769a734b3a1aafc61734068638a0d6c86934"
+
+[[files]]
+path = "text_encoder/model-00008-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00008-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "431ca56535c8781944ce3801f5eb61c45531e853ecc5846d936ebaf4761b764f"
+
+[[files]]
+path = "text_encoder/model-00009-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00009-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "3825e3f4302f4d2f7d76aa7430d2ce0864fde6b9e540a5806bf0d8e38e4d9f47"
+
+[[files]]
+path = "text_encoder/model-00010-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00010-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "aded5a4d1d5e22dbd8b6f79266b6eb88c840411b09527c53917a1419ace22e2f"
+
+[[files]]
+path = "text_encoder/model-00011-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00011-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "3820ffe8d8d6477f6fe8d614ef3c87abb264ee39accebf43a1507b970d80946f"
+
+[[files]]
+path = "text_encoder/model-00012-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00012-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "05ad2d08ce71963121c9b03f1d9ec5d7641052f4b23c6c12b80d71065eb8e98e"
+
+[[files]]
+path = "text_encoder/model-00013-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00013-of-00014.safetensors"
+bytes = 4875990584
+sha256 = "b64f2289871261fdd1abbd3b78bcd66011b341de3dc8eeb2ed1a473ee7c8d95c"
+
+[[files]]
+path = "text_encoder/model-00014-of-00014.safetensors"
+local_path = "official-diffusers/text_encoder/model-00014-of-00014.safetensors"
+bytes = 3270697008
+sha256 = "e45b6c9998c77ee5a6577f9f47bc76416c1d4d387169e50c4c9d3134ea51b13b"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00001-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00001-of-00014.safetensors"
+bytes = 4825958704
+sha256 = "2d847200c45c09dd7f973c1b096663068408ef851ee0b3711d059b6dc5dcd028"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00002-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00002-of-00014.safetensors"
+bytes = 4702158032
+sha256 = "2c4d362eddd2802180ac9c744849eb9ba8d9c8b984bdf9822cb02ed004b29184"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00003-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00003-of-00014.safetensors"
+bytes = 4933368192
+sha256 = "949c5aafbbfa5654da730a6a7fafd75adb164d0857b095a30e8bb6d390887d69"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00004-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00004-of-00014.safetensors"
+bytes = 4567069608
+sha256 = "eef7616790105ee839766bb2027203bf2c0d87c6aa038dca84145a8675f5ce28"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00005-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00005-of-00014.safetensors"
+bytes = 4702158080
+sha256 = "43fdf42d638e8bc6745f713fae80c93bb301807a1a5ae7249344ce28e202a494"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00006-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00006-of-00014.safetensors"
+bytes = 4933368232
+sha256 = "6442510b34d173653f0cce5c964b935395a8f7accf0b9cc0aa31aec59805239d"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00007-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00007-of-00014.safetensors"
+bytes = 4567069608
+sha256 = "29f48f535c91dac76496ca821eeb16ca24bc4caf3f0cae8b920a89b1f966da6d"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00008-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00008-of-00014.safetensors"
+bytes = 4702158080
+sha256 = "c711b096c764bd60f0b8b6ad49518bfab6d614fb788c725add8741c0674a4cd8"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00009-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00009-of-00014.safetensors"
+bytes = 4933368232
+sha256 = "44428defe3976cbb87635ad200b958199e739986697cd29fdf27aeb7294b5944"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00010-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00010-of-00014.safetensors"
+bytes = 4567069608
+sha256 = "3d44939c374c9da382e9c6877e1946adf7b84e08c7a881c068f228d6849411c9"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00011-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00011-of-00014.safetensors"
+bytes = 4702158080
+sha256 = "224d24430b58127a5577721084e0e704a0e74ec96dd7c35bc6fc0994ebd87c33"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00012-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00012-of-00014.safetensors"
+bytes = 4933368232
+sha256 = "48fa2bd8fe134eef565ab2464f1c2589a6657cba0d14283dfc06b532f8961f3c"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00013-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00013-of-00014.safetensors"
+bytes = 4567069608
+sha256 = "be5b4b1809f9d546ffd4b3fcf41e5c1e02b819125caa6bc105c109b04c051bd3"
+
+[[files]]
+path = "transformer/diffusion_pytorch_model-00014-of-00014.safetensors"
+local_path = "official-diffusers/transformer/diffusion_pytorch_model-00014-of-00014.safetensors"
+bytes = 4644161920
+sha256 = "8fbd5e6c1fb1df7ce988ca90f3d59e7610e465c7517e4b344eda4a214ba4b97d"
+
+[[files]]
+path = "vae/diffusion_pytorch_model-00001-of-00003.safetensors"
+local_path = "official-diffusers/vae/diffusion_pytorch_model-00001-of-00003.safetensors"
+bytes = 5061033024
+sha256 = "72f4c6be84ac0674f27398cde991dd9d719762f3952c4921aa66b2ce542f6374"
+
+[[files]]
+path = "vae/diffusion_pytorch_model-00002-of-00003.safetensors"
+local_path = "official-diffusers/vae/diffusion_pytorch_model-00002-of-00003.safetensors"
+bytes = 4955986528
+sha256 = "2e05e8bc23fa4071043e17fd242be8acd0685e781a43987432b2eae925be4198"
+
+[[files]]
+path = "vae/diffusion_pytorch_model-00003-of-00003.safetensors"
+local_path = "official-diffusers/vae/diffusion_pytorch_model-00003-of-00003.safetensors"
+bytes = 398539336
+sha256 = "c05d6ac4b1a33de372799d708531da6320f6a3ce6d1ce6d895e770988e004a39"

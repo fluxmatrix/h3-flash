@@ -1,0 +1,4 @@
+# Isolated optional environment for the local Qwen3 prompt enhancer.
+# It is deliberately separate from the H3 runtime because vLLM and the
+# official H3 Diffusers snapshot require different Transformers versions.
+vllm==0.28.0

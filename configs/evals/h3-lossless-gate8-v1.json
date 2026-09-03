@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-lossless-gate8-v1",
+  "base_suite": "h3-broad40-v1.1.json",
+  "case_ids": [
+    "people_mandarin_interview",
+    "action_drummer_sync",
+    "animal_hummingbird_slow_motion",
+    "physics_strawberry_splash",
+    "world_drone_forest_waterfall",
+    "style_paper_collage_water_cycle",
+    "commercial_watch_mechanism",
+    "diagnostic_mirror_lipstick"
+  ]
+}

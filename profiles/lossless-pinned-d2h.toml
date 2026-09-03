@@ -1,0 +1,16 @@
+schema_version = 1
+id = "lossless-pinned-d2h"
+status = "experimental"
+parent = "official"
+quality_class = "bit_exact"
+description = "Single-factor lossless ablation: persistent pinned output D2H only."
+
+[optimizations]
+persistent_pinned_d2h = true
+
+[correctness]
+_replace = true
+contract = "bit_exact"
+tensor_gate = "torch.equal"
+artifact_gate = "mp4_sha256"
+required_case_pass_rate = 1.0

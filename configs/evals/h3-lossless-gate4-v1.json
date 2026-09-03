@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-lossless-gate4-v1",
+  "base_suite": "h3-broad40-v1.1.json",
+  "case_ids": [
+    "people_mandarin_interview",
+    "action_drummer_sync",
+    "physics_strawberry_splash",
+    "diagnostic_mirror_lipstick"
+  ]
+}

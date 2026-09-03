@@ -1,0 +1,15 @@
+schema_version = 1
+id = "lossless-8xb200-ffmpeg"
+status = "experimental"
+parent = "lossless-8xb200"
+quality_class = "numerically_equivalent"
+description = "Lossless SP8 model runtime with a generated-tensor-exact FFmpeg raw-video output path."
+
+[output]
+encoder = "ffmpeg_raw_pipe"
+video_codec = "libx264"
+preset = "veryfast"
+crf = 20
+pixel_format = "yuv420p"
+audio_codec = "aac"
+contract = "generated_tensors_exact_encoded_artifact_not_bit_exact"

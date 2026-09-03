@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-showcase4-10s-v1",
+  "purpose": "Four contemporary ten-second text-to-video-and-audio showcases with clean, premium visual direction.",
+  "resolution": [1344, 768],
+  "num_frames": 243,
+  "fps": 24,
+  "nominal_duration_seconds": 10,
+  "actual_video_duration_seconds": 10.125,
+  "design_notes": [
+    "The set retains the approved glacier escape, neon metro runner, capybara with giant dumpling and Chinese solo dance concepts.",
+    "Each prompt uses one principal subject, one continuous shot and a readable ten-second action arc.",
+    "The dance case adapts the clean lighting and natural move into a medium close-up from a public H3 fashion example; its subject, wardrobe and choreography are original.",
+    "Outputs are native 1344x768; cinematic language describes art direction rather than claiming 4K delivery."
+  ],
+  "sources": [
+    {
+      "kind": "community_style_reference",
+      "url": "https://x.com/liyue_ai/status/2094329049493668236",
+      "note": "Reference for clean commercial portrait lighting and a natural transition into a medium close-up."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "cinematic_glacier_escape",
+      "mode": "t2va",
+      "seed": 2026090341,
+      "category": "cinematic_spectacle",
+      "prompt": "integrated_multimodal_description: [Shot 1] Photorealistic contemporary survival-film cinematography on a vast Icelandic glacial lake beneath clean overcast daylight. The palette is natural ice blue, neutral white, charcoal and one controlled red accent, with crisp air, deep detail and no teal-orange grading. A single rider in a matte-black helmet drives the same modern red rescue snowmobile rapidly toward the camera while one immense glacier face fractures far behind. A stabilized low tracking camera with large-format 40mm cinema-lens perspective pulls backward just above the ice. Fine branching cracks chase the vehicle; one huge serac falls with convincing weight and sends a broad wall of white spray outward. The rider makes one decisive turn around a slab, straightens, then clears one narrow blue fissure and lands firmly as the collapse recedes behind. Keep the rider, snowmobile, travel direction, scale and geometry coherent in one continuous shot. Sharp snow crystals, resolved ice texture, natural motion blur, controlled highlights, no artificial bloom, no excessive haze and no cuts.\n\noverall_soundscape: A detailed snowmobile engine under load, fine ice cracks moving across the stereo field, one deep glacial impact, granular frozen spray and a firm synchronized suspension landing.\n\nnon_diegetic_music: Restrained low strings build beneath the chase, peak at the jump and resolve without overpowering the natural sound."
+    },
+    {
+      "case_id": "game_neon_metro_runner",
+      "mode": "t2va",
+      "seed": 2026090352,
+      "category": "contemporary_game_cinematic",
+      "prompt": "integrated_multimodal_description: [Shot 1] A polished next-generation 3D side-scrolling game cinematic with physically based materials, fine character detail and a restrained midnight-blue, electric-cyan and warm-yellow palette. A small red-panda courier in a tailored yellow technical jacket sprints continuously from left to right through a vast minimalist elevated metro tunnel. Smooth graphite walls, repeating cyan linear lights, a single warm-yellow path strip and large clear glass panels create an uncluttered geometric environment. The lateral tracking camera keeps the courier large and readable at roughly one quarter of the frame height while the repeating lights move in precise parallax. One compact spherical maintenance robot rolls into the path; the courier plants both feet, makes one high clean jump over it, lands with believable weight and continues running. Behind the glass, a sleek silver metro train passes on a separate track as the courier reaches a bright circular station portal. Preserve the same red-panda face, fur, jacket, scale, direction, robot and platform geometry throughout. Contemporary premium game art, clean material separation, finely resolved fur and wet-surface detail, controlled reflections and stable edges in one uninterrupted shot.\n\noverall_soundscape: Rhythmic shoes on composite flooring, the robot's soft electronic chirp, one airy jump, a firm landing and the clean stereo rush of the passing train.\n\nnon_diegetic_music: Original modern electronic percussion builds through the run and lands one clear beat with the courier."
+    },
+    {
+      "case_id": "character_capybara_giant_dumpling",
+      "mode": "t2va",
+      "seed": 2026090343,
+      "category": "character_comedy",
+      "prompt": "integrated_multimodal_description: [Shot 1] Premium contemporary 3D character animation in a pristine miniature kitchen with smooth warm-white walls, pale sage cabinetry, a light stone counter and soft daylight. The clean composition contains no signs, writing, logos, hanging clutter or other characters. One round capybara chef with finely groomed brown fur, one clearly visible head, two small ears and two low distinct paws stands on the left in one crisp white apron and one small white chef hat. On the right, spatially separate from the chef, sits one comically giant pleated white dumpling inside an open bamboo steamer. A continuous medium-wide camera makes a very slow push forward. The capybara studies the dumpling, reaches with one long wooden spoon and gives its side one gentle poke without crossing the face or body. The giant dumpling compresses slightly, jiggles from side to side like soft dough, then releases one small clean puff of steam upward. The capybara leans back with widened eyes, looks directly at the camera and gives one delighted smile and proud nod. Maintain clear empty space between the capybara and dumpling; preserve the same single head, face, hat, two ears, two paws, spoon and body throughout. Detailed soft fur and dough, restrained cream-and-sage palette, controlled highlights, no face obstruction, no body overlap, no duplicate anatomy and no cuts.\n\noverall_soundscape: Quiet kitchen room tone, one wooden tap, three soft doughy jiggles, a gentle steam puff and the capybara's pleased chirp.\n\nnon_diegetic_music: Minimal playful marimba places one clean note on the poke, reaction and final nod."
+    },
+    {
+      "case_id": "performance_chinese_studio_dance",
+      "mode": "t2va",
+      "seed": 2026090374,
+      "category": "solo_audiovisual_performance",
+      "prompt": "integrated_multimodal_description: [Shot 1] Premium contemporary fashion-film realism inside a sunlit minimalist art-museum atrium. One immense smooth warm-white limestone wall curves gently across the entire image, meeting a pale seamless terrazzo floor beneath a single soft skylight gradient. The architecture is quiet, pristine and spacious, with delicate natural contact shadows and a restrained neutral color grade. One adult Chinese female dancer in her mid-twenties has expressive dark eyes, natural facial proportions and long straight black hair gathered in a sleek high ponytail. She wears a deep-crimson sculptural sleeveless top, ivory tailored shorts and small silver earrings. A fixed eye-level camera with flattering 65mm portrait perspective begins in a mid-thigh medium shot. She holds confident eye contact and performs one fluid pop-dance phrase: two precise shoulder accents, a sweeping crossed-arm pattern, one controlled torso wave and a fast half-turn that releases her ponytail. She faces the lens again and advances two measured dance steps so her own movement changes the composition naturally to waist-up and then chest-up medium close-up. She finishes with one crisp hand accent beside her cheek, a playful blink and a restrained confident smile. The same Chinese facial identity, fine skin texture, expressive eyes, natural hands, body proportions, hair and wardrobe remain sharply resolved and consistent throughout the continuous shot.\n\noverall_soundscape: Clean synchronized fabric movement, controlled breathing and soft shoe impacts in the airy atrium.\n\nnon_diegetic_music: A minimal contemporary pop beat with precise accents for the shoulders, turn, final hand movement and blink."
+    }
+  ]
+}

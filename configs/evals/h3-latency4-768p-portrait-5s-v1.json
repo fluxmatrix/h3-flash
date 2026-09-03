@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "suite_id": "h3-latency4-768p-portrait-5s-v1",
+  "base_suite": "h3-broad40-v1.1.json",
+  "resolution": [768, 1344],
+  "num_frames": 124,
+  "fps": 24,
+  "nominal_duration_seconds": 5,
+  "actual_video_duration_seconds": 5.167,
+  "case_ids": [
+    "people_mandarin_interview",
+    "action_drummer_sync",
+    "physics_strawberry_splash",
+    "diagnostic_mirror_lipstick"
+  ]
+}

@@ -1,0 +1,29 @@
+# Direct/import-boundary versions used by all three H3-Flash public lanes on
+# the 2026-09-02 B200 host. The generated transitive installation lock is
+# b200-cu130.runtime.lock.txt.
+#
+# Diffusers is intentionally absent: the run imports the pinned checkout at
+# commit abc5e9bf71fd38f53cd471bc3acaa84bc5ecbfdc (0.40.0.dev0) from
+# locks/upstreams.toml. Installing a moving PyPI Diffusers build is forbidden.
+torch==2.13.0+cu130
+torchvision==0.28.0+cu130
+torchaudio==2.11.0+cu130
+transformers==5.5.3
+accelerate==1.14.0
+safetensors==0.8.0
+einops==0.8.2
+numpy==1.26.4
+Pillow==12.3.0
+av==16.0.1
+sentencepiece==0.2.2
+protobuf==6.33.6
+huggingface-hub==1.23.0
+filelock==3.32.3
+httpx==0.28.1
+importlib-metadata==9.0.1
+packaging==26.3
+PyYAML==6.0.3
+regex==2026.9.3
+requests==2.34.2
+tokenizers==0.22.2
+tqdm==4.70.0

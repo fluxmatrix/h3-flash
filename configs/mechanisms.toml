@@ -1,0 +1,288 @@
+schema_version = 1
+headline_minimum_median_reduction_percent = 5.0
+headline_must_exceed_run_noise = true
+
+# Public reports have only two optimization lanes. The validation_profile field
+# is an internal evidence boundary, not another public performance tier.
+
+[[mechanisms]]
+id = "request_flush_elision"
+title = "Remove redundant inter-request GC and allocator flush"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_in_official_backend"
+origin = "FluxMatrix"
+changes = ["request lifecycle", "allocator state"]
+gates = ["paired MP4 SHA-256 equality"]
+timing_scope = "end_to_end"
+headline_candidate = false
+evidence_note = "The official backend is resident by construction and never performs per-request gc.collect or empty_cache; no separate gain is claimed."
+
+[[mechanisms]]
+id = "persistent_pinned_output"
+title = "Persistent pinned host output buffers"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_broad40_measured"
+origin = "FluxMatrix; same general transfer direction used by vLLM-Omni"
+changes = ["GPU-to-host transfer", "host buffer lifetime"]
+gates = ["paired MP4 SHA-256 equality"]
+timing_scope = "device_to_host"
+headline_candidate = false
+evidence_note = "Official Broad40 hot D2H median fell from about 0.805 s to 0.027 s; whole-request median changed by about -0.42%, so this remains a bundled small item."
+
+[[mechanisms]]
+id = "resident_allocator_reuse"
+title = "Resident allocator and reusable buffers"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_baseline_behavior"
+origin = "FluxMatrix"
+changes = ["buffer allocation", "buffer lifetime"]
+gates = ["tensor equality", "paired artifact equality"]
+timing_scope = "request_lifecycle"
+headline_candidate = false
+evidence_note = "Historical 5 s sequence attributed -0.342 s, but retained flush made that attribution incomplete."
+
+[[mechanisms]]
+id = "rank0_gpu_reorder_single_d2h"
+title = "Rank-zero GPU reorder and single output transfer"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_gate4_measured"
+origin = "FluxMatrix"
+changes = ["output layout", "GPU-to-host transfer count"]
+gates = ["tensor equality", "paired artifact equality"]
+timing_scope = "device_to_host"
+headline_candidate = false
+evidence_note = "Combined with persistent pinned output in SP8 Gate4; moving uint8 conversion/reorder before D2H reduced transfer payload and removed roughly 2.9 s from the initial E2E implementation, while generation was unchanged."
+
+[[mechanisms]]
+id = "uneven_row_count_cache"
+title = "Cache invariant uneven-row metadata"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_bit_exact_gate_passed"
+origin = "FluxMatrix"
+changes = ["shape metadata cache"]
+gates = ["tensor equality", "paired artifact equality"]
+timing_scope = "transformer"
+headline_candidate = false
+evidence_note = "One uneven-row collective per request is cached and reset at every Broad40 request boundary; it is included in packed Ulysses rather than separately headlined."
+
+[[mechanisms]]
+id = "bit_exact_qkv_relayout"
+title = "Bit-exact QKV relayout"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_bit_exact_gate_passed"
+origin = "FluxMatrix Triton implementation informed by NVIDIA Sana layout"
+changes = ["QKV memory layout"]
+gates = ["tensor equality", "paired artifact equality"]
+timing_scope = "attention"
+headline_candidate = false
+evidence_note = "Triton destination-major QKV pack and inverse head merge passed torch.equal for degrees 2/4/8 and an eight-rank uneven-sequence dense-attention output gate."
+
+[[mechanisms]]
+id = "adaln_result_cache"
+title = "Cache exact fixed-schedule AdaLN projections"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_gate4_measured"
+origin = "FluxMatrix"
+changes = ["request-invariant result cache"]
+gates = ["tensor equality", "paired artifact equality"]
+timing_scope = "transformer"
+headline_candidate = false
+evidence_note = "All 2499 values (51 AdaLN sites x 49 evaluations) are populated at startup; freezing releases 26.021 GB of projection parameters. Gate4 latency was neutral (+0.016 s generation median)."
+
+[[mechanisms]]
+id = "ulysses_sp8"
+title = "Ulysses sequence parallelism"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_gate4_measured"
+origin = "DeepSpeed Ulysses architecture; Hugging Face Diffusers native context parallel implementation"
+changes = ["sequence sharding", "collective and floating-point reduction order"]
+gates = ["bounded tensor error", "Broad40 visual/audio review"]
+timing_scope = "transformer"
+headline_candidate = true
+median_e2e_reduction_seconds = 144.262
+median_e2e_reduction_percent = 81.3
+evidence_note = "Isolated Gate4 kept the official replicated Video VAE and disabled H3-Flash cache/kernel/packed-collective options: generation fell from 174.997 s on 1xB200 to 31.927 s on 8xB200 (-143.070 s, -81.8%, 5.48x); E2E fell by 144.262 s (-81.3%, 5.34x). This is the largest latency gain and a 1-to-8 GPU/request topology change, not same-resource efficiency."
+
+[[mechanisms]]
+id = "dense_flash_attention_4"
+title = "Dense FlashAttention 4 on the real prefix"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_measured_negative_excluded"
+origin = "Dao-AILab FlashAttention 4 Blackwell kernel; integration pattern informed by FastVideo"
+changes = ["dense attention kernel", "floating-point evaluation order"]
+gates = ["effective attention graph equality", "bounded tensor error", "Broad40 visual/audio review"]
+timing_scope = "attention"
+headline_candidate = false
+evidence_note = "The old gain conflated removing masked padding with changing kernels. The new official path is already padless: direct B200 tests found FA4 47.6%-60.4% slower than PyTorch 2.13 SDPA, so it is excluded from cumulative lossless."
+
+[[mechanisms]]
+id = "elementwise_qk_fusion"
+title = "Elementwise, QK-normalization and RoPE fusion"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_gate4_measured"
+origin = "NVIDIA Sana fusion architecture adapted by FluxMatrix"
+changes = ["kernel fusion", "floating-point evaluation order"]
+gates = ["bounded tensor error", "Broad40 visual/audio review"]
+timing_scope = "transformer"
+headline_candidate = true
+median_e2e_reduction_seconds = 3.598
+median_e2e_reduction_percent = 12.7
+evidence_note = "Cumulative SP8 Gate4 generation median fell from 26.926 s to 23.346 s (-3.580 s, -13.3%); E2E fell by 3.598 s (-12.7%). Real-activation bounded-numerical gates are recorded in every manifest."
+
+[[mechanisms]]
+id = "official_vae_clip_parallel"
+title = "Clip-parallel official Video VAE decode"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_gate4_measured"
+origin = "MiniMax official decoder; FluxMatrix clip scheduling"
+changes = ["clip distribution", "kernel and floating-point evaluation order"]
+gates = ["bounded decoded-frame error", "Broad40 visual/audio review"]
+timing_scope = "video_vae"
+headline_candidate = true
+median_e2e_reduction_seconds = 4.624
+median_e2e_reduction_percent = 17.3
+evidence_note = "Every unchanged official spatial tile is decoded once on one of eight ranks, equal tiles are batched, and original stitch order is restored. Isolated eager Gate4 generation fell from 25.378 s replicated to 20.771 s parallel (-4.607 s, -18.2%); E2E fell by 4.624 s (-17.3%)."
+
+[[mechanisms]]
+id = "packed_ulysses_collectives"
+title = "Packed QKV Ulysses with one destination-major collective"
+public_lane = "lossless"
+verification = "bit_exact"
+validation_profile = "exact"
+status = "implemented_gate4_measured"
+origin = "SGLang packed-layout direction; NVIDIA Sana GB200 implementation; adapted by FluxMatrix"
+changes = ["collective count", "QKV layout", "head relayout"]
+gates = ["eight-rank uneven-row torch.equal", "dense attention output torch.equal"]
+timing_scope = "attention"
+headline_candidate = true
+median_e2e_reduction_seconds = 2.464
+median_e2e_reduction_percent = 10.0
+evidence_note = "Gate4 generation median fell from 23.362 s to 20.895 s (-2.468 s, -10.6%); E2E fell by 2.464 s (-10.0%). Dense SDPA, all rows, and all 49 evaluations are unchanged."
+
+[[mechanisms]]
+id = "rank_local_io"
+title = "Rank-local input projection and compact output gather"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_gate4_measured"
+origin = "FluxMatrix"
+changes = ["projection placement", "output gather payload", "floating-point GEMM shape"]
+gates = ["distributed bounded tensor error", "Broad40 visual/audio review"]
+timing_scope = "transformer"
+headline_candidate = false
+median_e2e_reduction_seconds = 0.136
+median_e2e_reduction_percent = 0.6
+evidence_note = "Gate4 generation median fell from 20.895 s to 20.771 s (-0.124 s, -0.6%); E2E fell by 0.136 s (-0.6%). Inputs and RoPE were bit-identical; compact video output was bit-identical; audio max abs error was 1.05e-5."
+
+[[mechanisms]]
+id = "video_vae_compile"
+title = "Static-shape official Video VAE decoder compile"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_gate4_measured"
+origin = "PyTorch Inductor applied by FluxMatrix"
+changes = ["decoder kernel fusion", "floating-point evaluation order"]
+gates = ["bounded decoded-tile error", "Broad40 visual/audio review"]
+timing_scope = "video_vae"
+headline_candidate = false
+median_e2e_reduction_seconds = 0.436
+median_e2e_reduction_percent = 2.0
+evidence_note = "Gate4 generation median fell from 20.771 s to 20.445 s (-0.326 s, -1.6%); E2E fell by 0.436 s (-2.0%). Startup compile warmup was 50.289 s and is excluded; relative L2 gate was 2.59e-4."
+
+[[mechanisms]]
+id = "fused_qkv_projection"
+title = "Fused QKV projection GEMM"
+public_lane = "lossless"
+verification = "mathematically_equivalent"
+validation_profile = "equivalent"
+status = "implemented_measured_negative_excluded"
+origin = "Hugging Face Diffusers projection fusion"
+changes = ["GEMM shape", "floating-point evaluation order"]
+gates = ["bounded tensor error", "Gate4 timing"]
+timing_scope = "attention"
+headline_candidate = false
+evidence_note = "Disabling it in SP8 Gate4 improved generation median from 27.143 s to 26.926 s and reduced peak allocation, so cumulative lossless keeps the three projections separate."
+
+[[mechanisms]]
+id = "qwen_int8_convrot"
+title = "INT8 Qwen3-VL text encoder"
+public_lane = "flash"
+verification = "approximate"
+validation_profile = "fast"
+status = "historical_unisolated_pending_port"
+origin = "Comfy-Org repackaged acceleration model"
+changes = ["text-encoder weights", "conditioning values"]
+gates = ["Broad40 visual/audio review"]
+timing_scope = "text_encoder"
+headline_candidate = false
+evidence_note = "Used by the historical endpoint; not yet isolated against official BF16 Qwen."
+
+[[mechanisms]]
+id = "lightx2v_turbo4"
+title = "LightX2V Turbo LoRA and four transformer evaluations"
+public_lane = "flash"
+verification = "approximate"
+validation_profile = "fast"
+status = "implemented_broad40_measured"
+origin = "LightX2V MiniMax-H3 Turbo acceleration model"
+changes = ["DiT weights", "sampling schedule", "transformer evaluation count"]
+gates = ["Broad40 visual/audio review"]
+timing_scope = "diffusion"
+headline_candidate = true
+median_e2e_reduction_seconds = 18.215
+median_e2e_reduction_percent = 83.9
+evidence_note = "Ported as the only changed quality variable on the BF16 dense SP8 runtime. Broad40 passed 40/40 technical media checks; generation/E2E medians fell from 20.469/21.707 s lossless to 2.231/3.492 s Turbo4 (-89.1% / -83.9%, 9.18x / 6.22x). Human review is still required for the approximate quality boundary."
+
+[[mechanisms]]
+id = "ffmpeg_raw_pipe_output"
+title = "Raw-RGB FFmpeg output pipeline"
+public_lane = "lossless"
+verification = "generated_tensor_exact"
+validation_profile = "output"
+status = "implemented_broad40_measured"
+origin = "FluxMatrix; ported from the legacy LTX MiniMax-H3 acceleration path"
+changes = ["video codec invocation", "audio PCM staging", "container bytes"]
+gates = ["generated tensor equality", "full audio duration", "Broad40 technical media comparison"]
+timing_scope = "artifact_write"
+headline_candidate = true
+median_e2e_reduction_seconds = 0.961
+median_e2e_reduction_percent = 27.5
+evidence_note = "Generated tensors are unchanged, while the encoded artifact is not bit-exact. The final full-audio Broad40 run reduced artifact median from 1.255 s to 0.306 s and E2E from 3.492 s to 2.531 s (-0.961 s, -27.5%, 1.38x); 40/40 retained 124 video frames and 165888 decoded audio samples."
+
+[[mechanisms]]
+id = "sol_sparse_attention"
+title = "Sol input-dependent block-sparse attention"
+public_lane = "flash"
+verification = "approximate"
+validation_profile = "fast"
+status = "planned_optional"
+origin = "NVIDIA Sana/Sol attention architecture"
+changes = ["effective attention graph"]
+gates = ["dispatch audit", "Broad40 visual/audio review"]
+timing_scope = "attention"
+headline_candidate = false
+evidence_note = "Not enabled in the historical arbitrary-prompt result, which recorded dense_calls=200 and sparse_calls=0."
