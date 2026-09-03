@@ -39,16 +39,14 @@ modes, making the speed/quality boundary explicit and reproducible.
 
 ## Examples
 
-Click any preview to play the MP4 with sound.
-
 <table>
   <tr>
-    <td width="50%"><a href="assets/samples/flash/cinematic_glacier_escape.mp4?raw=1"><img src="assets/previews/samples/cinematic_glacier_escape.gif" alt="Glacier escape" width="100%"></a><br><b>Glacier escape</b><br>Natural large-format action, resolved ice physics, and synchronized impact</td>
-    <td width="50%"><a href="assets/samples/flash/neon_metro_runner.mp4?raw=1"><img src="assets/previews/samples/neon_metro_runner.gif" alt="Neon metro runner" width="100%"></a><br><b>Neon metro runner</b><br>Next-generation 3D game art, clean geometry, parallax, and synchronized action</td>
+    <td width="50%"><video src="https://github.com/user-attachments/assets/e628987f-837d-483b-9cdb-fcf2e94aa090" controls></video><br><b>Glacier escape</b><br>Natural large-format action, resolved ice physics, and synchronized impact</td>
+    <td width="50%"><video src="https://github.com/user-attachments/assets/35e9aa59-b9bc-47aa-9fef-942148794fd4" controls></video><br><b>Neon metro runner</b><br>Next-generation 3D game art, clean geometry, parallax, and synchronized action</td>
   </tr>
   <tr>
-    <td width="50%"><a href="assets/samples/flash/capybara_giant_dumpling.mp4?raw=1"><img src="assets/previews/samples/capybara_giant_dumpling.gif" alt="Giant dumpling" width="100%"></a><br><b>Giant dumpling</b><br>Contemporary character animation, stable anatomy, expressive reaction, and foley</td>
-    <td width="50%"><a href="assets/samples/flash/studio_dance.mp4?raw=1"><img src="assets/previews/samples/studio_dance.gif" alt="Studio dance" width="100%"></a><br><b>Studio dance</b><br>Chinese solo performer, clean commercial portraiture, expressive choreography, and rhythmic audio</td>
+    <td width="50%"><video src="https://github.com/user-attachments/assets/3f621c4b-0599-41f7-8149-ee528c2965ca" controls></video><br><b>Giant dumpling</b><br>Contemporary character animation, stable anatomy, expressive reaction, and foley</td>
+    <td width="50%"><video src="https://github.com/user-attachments/assets/bdc4b589-9db5-437f-80c4-68de7335758a" controls></video><br><b>Studio dance</b><br>Chinese solo performer, clean commercial portraiture, expressive choreography, and rhythmic audio</td>
   </tr>
 </table>
 
@@ -90,7 +88,6 @@ The full 40-prompt evaluation set is available at
 
 Every row uses the same prompt, seed, resolution, and duration. The displayed
 latency is warm resident-worker E2E, using the same boundary as the table above.
-Click any preview to play the MP4 with sound.
 
 <table>
   <tr>
@@ -99,14 +96,14 @@ Click any preview to play the MP4 with sound.
     <th>FLASH · 8×B200</th>
   </tr>
   <tr>
-    <td><a href="assets/comparisons/modes/people_mandarin_interview_official.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_official.gif" alt="Mandarin interview in OFFICIAL mode" width="100%"></a><br><b>Mandarin interview · 178.512s E2E</b></td>
-    <td><a href="assets/comparisons/modes/people_mandarin_interview_lossless.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_lossless.gif" alt="Mandarin interview in LOSSLESS mode" width="100%"></a><br><b>Mandarin interview · 20.840s E2E</b></td>
-    <td><a href="assets/comparisons/modes/people_mandarin_interview_flash.mp4?raw=1"><img src="assets/previews/comparisons/people_mandarin_interview_flash.gif" alt="Mandarin interview in FLASH mode" width="100%"></a><br><b>Mandarin interview · 2.690s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/2f008fb1-26ff-400a-972f-48cd3548029e" controls></video><br><b>Mandarin interview · 178.512s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/da19514e-2aea-46d8-a846-b2666ad6b0ee" controls></video><br><b>Mandarin interview · 20.840s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/f8b886e4-9156-4167-8918-e361c94df6cb" controls></video><br><b>Mandarin interview · 2.690s E2E</b></td>
   </tr>
   <tr>
-    <td><a href="assets/comparisons/modes/action_rooftop_parkour_official.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_official.gif" alt="Rooftop parkour in OFFICIAL mode" width="100%"></a><br><b>Rooftop parkour · 176.437s E2E</b></td>
-    <td><a href="assets/comparisons/modes/action_rooftop_parkour_lossless.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_lossless.gif" alt="Rooftop parkour in LOSSLESS mode" width="100%"></a><br><b>Rooftop parkour · 20.915s E2E</b></td>
-    <td><a href="assets/comparisons/modes/action_rooftop_parkour_flash.mp4?raw=1"><img src="assets/previews/comparisons/action_rooftop_parkour_flash.gif" alt="Rooftop parkour in FLASH mode" width="100%"></a><br><b>Rooftop parkour · 2.593s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/3d352a66-90d5-4de3-8013-6f5600eb3370" controls></video><br><b>Rooftop parkour · 176.437s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/372533f8-da08-4252-9ec4-975a4d026cf7" controls></video><br><b>Rooftop parkour · 20.915s E2E</b></td>
+    <td><video src="https://github.com/user-attachments/assets/16f26759-af27-419c-9ca5-9185ac9e943a" controls></video><br><b>Rooftop parkour · 2.593s E2E</b></td>
   </tr>
 </table>
 

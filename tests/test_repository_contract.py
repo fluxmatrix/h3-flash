@@ -7,19 +7,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readmes_link_mp4s_with_repository_previews() -> None:
+def test_readmes_embed_github_video_attachments() -> None:
     for readme_name in ("README.md", "README_zh-CN.md"):
         readme = (ROOT / readme_name).read_text(encoding="utf-8")
-        media = re.findall(
-            r'<a href="([^\"]+\.mp4)\?raw=1"><img src="([^\"]+\.gif)"',
+        sources = re.findall(
+            r'<video src="(https://github\.com/user-attachments/assets/'
+            r'[a-f0-9-]+)" controls></video>',
             readme,
         )
-        assert len(media) == 10
-        assert "<video" not in readme
-        assert len({mp4 for mp4, _ in media}) == 10
-        assert len({preview for _, preview in media}) == 10
-        assert all((ROOT / mp4).is_file() for mp4, _ in media)
-        assert all((ROOT / preview).is_file() for _, preview in media)
+        assert len(sources) == 10
+        assert len(set(sources)) == 10
+        assert "assets/previews" not in readme
+
+    repository_mp4s = list((ROOT / "assets" / "samples" / "flash").glob("*.mp4"))
+    repository_mp4s += list(
+        (ROOT / "assets" / "comparisons" / "modes").glob("*.mp4")
+    )
+    assert len(repository_mp4s) == 10
 
 
 def test_readme_performance_matches_canonical_results() -> None:
